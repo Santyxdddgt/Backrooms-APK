@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'BACKROOMS-APK-listo-para-compilar.zip'
-      - '.github/workflows/main.yml'
+      - 'BACKROOMS-APK.zip'
 
 permissions:
   contents: read
@@ -31,11 +30,27 @@ jobs:
       - name: Instalar plataforma Android
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Extraer ZIP del proyecto
+      - name: Validar y preparar clave de firma persistente
+        env:
+          KEYSTORE_BASE64: ${{ secrets.BACKROOMS_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.BACKROOMS_KEYSTORE_PASSWORD }}
+        shell: bash
         run: |
-          unzip -q BACKROOMS-APK-listo-para-compilar.zip -d extracted
+          if [[ -z "$KEYSTORE_BASE64" || -z "$KEYSTORE_PASSWORD" ]]; then
+            echo "::error::Faltan los secrets BACKROOMS_KEYSTORE_BASE64 y/o BACKROOMS_KEYSTORE_PASSWORD. Configuralos en Settings > Secrets and variables > Actions antes de subir el ZIP."
+            exit 1
+          fi
+          printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/backrooms-update-key.jks"
+          keytool -list -keystore "$RUNNER_TEMP/backrooms-update-key.jks" -storetype JKS -storepass "$KEYSTORE_PASSWORD" -alias backrooms >/dev/null
+          echo "Keystore persistente validado."
+
+      - name: Extraer proyecto actualizado
+        run: |
+          test -f BACKROOMS-APK.zip
+          unzip -q BACKROOMS-APK.zip -d extracted
           test -f extracted/BACKROOMS/gradlew
           test -f extracted/BACKROOMS/app/build.gradle.kts
+          grep -E 'applicationId|versionCode|versionName' extracted/BACKROOMS/app/build.gradle.kts
 
       - name: Compilar APK
         working-directory: extracted/BACKROOMS
@@ -43,10 +58,26 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon assembleDebug
 
+      - name: Firmar APK con la clave persistente
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.BACKROOMS_KEYSTORE_PASSWORD }}
+        shell: bash
+        run: |
+          mkdir -p out
+          zipalign -f -p 4 extracted/BACKROOMS/app/build/outputs/apk/debug/app-debug.apk "$RUNNER_TEMP/aligned.apk"
+          apksigner sign \
+            --ks "$RUNNER_TEMP/backrooms-update-key.jks" \
+            --ks-key-alias backrooms \
+            --ks-pass env:KEYSTORE_PASSWORD \
+            --key-pass env:KEYSTORE_PASSWORD \
+            --out out/BACKROOMS-APK.apk \
+            "$RUNNER_TEMP/aligned.apk"
+          apksigner verify --verbose out/BACKROOMS-APK.apk
+
       - name: Publicar APK descargable
         uses: actions/upload-artifact@v4
         with:
           name: BACKROOMS-APK
-          path: extracted/BACKROOMS/app/build/outputs/apk/debug/app-debug.apk
+          path: out/BACKROOMS-APK.apk
           if-no-files-found: error
           retention-days: 14
