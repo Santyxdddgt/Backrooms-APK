@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'BACKROOMS-APK.zip'
+      - 'BACKROOMS-APK-listo-para-compilar.zip'
       - '.github/workflows/main.yml'
 
 permissions:
@@ -14,22 +14,28 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-java@v4
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
-      - uses: android-actions/setup-android@v3
+      - name: Configurar Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: platform-tools
 
-      - name: Preparar Android SDK
+      - name: Instalar plataforma Android
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
-      - name: Extraer ZIP completo
+      - name: Extraer ZIP del proyecto
         run: |
-          unzip -q BACKROOMS-APK.zip -d extracted
+          unzip -q BACKROOMS-APK-listo-para-compilar.zip -d extracted
           test -f extracted/BACKROOMS/gradlew
+          test -f extracted/BACKROOMS/app/build.gradle.kts
 
       - name: Compilar APK
         working-directory: extracted/BACKROOMS
@@ -37,7 +43,7 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon assembleDebug
 
-      - name: Publicar APK
+      - name: Publicar APK descargable
         uses: actions/upload-artifact@v4
         with:
           name: BACKROOMS-APK
