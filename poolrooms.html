@@ -2354,6 +2354,7 @@ const ALL_LEVELS = [
   { id: '31', label: 'NIVEL 31' },
   { id: '31_post', label: 'NIVEL 31 · POST-BLACKOUT' },
   { id: '37', label: 'NIVEL 37 — POOLROOMS' },
+  { id: '37.2', label: 'NIVEL 37.2 — ALCANTARILLAS' },
 ];
 function defaultSave() {
   return {
@@ -2940,7 +2941,7 @@ function completeLevel37() {
   if (level37Done) return;
   level37Done = true;
   markLevelCompleted('37', Math.floor(playTime37), 1, 0);
-  const params = new URLSearchParams({ lives: '1', time: String(Math.floor(playTime37)), shards: '0' });
+  const params = new URLSearchParams({ lives: '1', time: String(Math.floor(playTime37)), shards: '0', from: 'poolrooms' });
   if (window.__mpUrlParams) { try { window.__mpUrlParams(params); } catch (_) {} }
   window.__PR37Nav = GITHUB_PAGES + 'level37-2.html?' + params.toString();   // QA: URL de destino real
   navToLevel('level37-2.html', '?' + params.toString());

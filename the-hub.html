@@ -437,6 +437,7 @@ var HUB_LEVELS = [
 { id: '31',        label: 'NIVEL 31 — ROLLER RINK' },
 { id: '31_post',   label: 'NIVEL 31 — POST-BLACKOUT' },
 { id: '37',        label: 'NIVEL 37 — POOLROOMS' },
+{ id: '37.2',      label: 'NIVEL 37.2 — ALCANTARILLAS' },
 ];
 function defaultSave() {
 return {
@@ -1154,7 +1155,7 @@ if(rd.type==='roller'){obj.phase=0;obj.phaseT=0;}
 riftObjs.push(obj);
 });
 /* =====================================================================
---> PUERTA ALCANTARILLAS (Nivel 37.2 — SECTOR NO CONSTRUIDO)
+--> PUERTA ALCANTARILLAS (Nivel 37.2 — DARK POOLROOMS)
     Puerta negra con "?" blanco. Se entra CAMINANDO (sin salto).
 ===================================================================== */
 function questionMarkTex(){
@@ -2041,7 +2042,7 @@ if(doorObj){
 doorObj.qmark.material.opacity=0.72+0.28*Math.abs(Math.sin(t*1.4));
 var ddx=player.x-doorObj.wx,ddz=player.z-doorObj.wz;
 var ddp=Math.hypot(ddx,ddz);
-if(ddp<7&&!doorObj.hinted){doorObj.hinted=true;toast('¿ALCANTARILLAS? — NO ESTÁ EN EL PLANO');}
+if(ddp<7&&!doorObj.hinted){doorObj.hinted=true;toast('ALCANTARILLAS — EL DRENAJE CONTINÚA');}
 if(ddp<3.0&&!doorObj.entering&&!enteringRift){
 doorObj.entering=true;
 audio.noclipTransition();
@@ -2049,8 +2050,8 @@ toast('NOCLIP → ALCANTARILLAS');
 fadeEl.style.transition='opacity 1.2s';
 fadeEl.style.opacity=1;
 setTimeout(function(){
-var base=ON_PAGES?'level37-2.html':GH_PAGES+'level37-2.html';
-window.location.replace(base);
+/* 37.2 se distribuye junto al Hub: la puerta debe funcionar también local/offline. */
+window.location.replace('level37-2.html?from=hub');
 },1400);}
 }
 }else if(state==='start'){
