@@ -1,131 +1,462 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
-<title>level37-2</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>BACKROOMS · NIVEL 37.2 — ALCANTARILLAS</title>
 <link rel="icon" href="data:,">
-<link href="./vendor/fonts/fonts.css" rel="stylesheet">
 <style>
-:root { --vt: 'VT323', monospace; --anon: 'Anonymous Pro', monospace; }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html, body {
-width: 100%; height: 100%; overflow: hidden; background: #000;
-font-family: var(--vt); user-select: none; -webkit-user-select: none;
-touch-action: none; overscroll-behavior: none;
-}
-body::before {
-content: ""; position: fixed; inset: 0; pointer-events: none;
-background: repeating-linear-gradient(to bottom,
-rgba(255,255,255,0.035) 0px, rgba(255,255,255,0.035) 1px,
-transparent 2px, transparent 4px);
-}
-body::after {
-content: ""; position: fixed; inset: 0; pointer-events: none;
-background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.75) 100%);
-}
-.wrap {
-position: relative; z-index: 1; height: 100%;
-display: flex; flex-direction: column; align-items: center; justify-content: center;
-gap: 1.2rem; color: #9adfe8; text-align: center; padding: 2rem 1rem;
-text-shadow: 2px 0 rgba(0, 200, 255, 0.3), -2px 0 rgba(0, 255, 120, 0.25);
-}
-h1 { font-family: var(--vt); font-weight: normal; letter-spacing: 0.14em;
-font-size: clamp(2.2rem, 9vw, 4.5rem); }
-.tape { font-size: 0.72rem; letter-spacing: 0.3em; opacity: 0.55;
-border: 1px solid rgba(154, 223, 232, 0.4); padding: 0.35em 1em; }
-.msg { font-family: var(--anon); font-size: 0.85rem; line-height: 1.9;
-max-width: 26rem; opacity: 0.85; letter-spacing: 0.05em; }
-.btns { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; }
-/* [v1.7-DEV] mini panel DEV del 37.2 (sector sin construir): selector de nivel
-   [v1.8-DEV] el ⚙ ya NO sale por defecto: primero hay que INSERTAR LA CINTA
-   PRIVILEGIADA (como en el resto de niveles); solo entonces existe el botón */
-#devBtn372 { position: fixed; top: 14px; right: 14px; z-index: 20; font-family: var(--vt);
-font-size: 1rem; letter-spacing: 0.2em; color: #c9ffd9; padding: 0.4em 1em; cursor: pointer;
-border: 1px solid rgba(125, 255, 154, 0.55); background: rgba(16, 64, 34, 0.9);
-animation: blink372 1.4s infinite steps(1); }
-#devBtn372.hidden { display: none; }
-@keyframes blink372 { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.45; } }
-/* [v1.8-DEV] cinta privilegiada: única puerta al panel DEV de este sector */
-#cta372 { font-family: var(--vt); font-size: 0.85rem; letter-spacing: 0.18em;
-color: #c9ffd9; padding: 0.5em 1.1em; cursor: pointer; text-align: center;
-border: 1px solid rgba(125, 255, 154, 0.55); background: rgba(16, 64, 34, 0.9);
-animation: blink372 1.4s infinite steps(1); max-width: 22rem; }
-#cta372.hidden { display: none; }
-#devPanel372 { position: fixed; top: 64px; right: 14px; z-index: 20; width: min(17rem, 88vw);
-background: rgba(2, 22, 30, 0.96); border: 1px solid rgba(125, 255, 154, 0.45);
-padding: 0.8rem 0.9rem; font-family: var(--vt); color: #cfeef6; display: none; }
-#devPanel372.open { display: block; }
-#devPanel372 .dt { color: #7dff9a; font-size: 0.72rem; letter-spacing: 0.22em; margin-bottom: 0.5rem; }
-#devPanel372 .dl { display: flex; flex-direction: column; gap: 0.35rem; }
-#devPanel372 a.dlv { color: #9df6ff; text-decoration: none; font-size: 0.95rem; letter-spacing: 0.12em; }
-#devPanel372 a.dlv:hover, #devPanel372 a.dlv:active { color: #fff; }
-a.btn {
-font-family: var(--vt); font-size: 1.05rem; letter-spacing: 0.15em;
-color: #d8f5de; text-decoration: none; padding: 0.45em 1.2em;
-border: 1px solid rgba(140, 220, 160, 0.65); background: rgba(16, 40, 22, 0.9);
-text-shadow: 0 0 8px rgba(120, 255, 160, 0.35); cursor: pointer;
--webkit-tap-highlight-color: transparent;
-}
-a.btn:hover, a.btn:active { background: rgba(60, 160, 90, 0.9); color: #fff; }
-a.btn.alt { color: #cfc27a; border-color: rgba(207, 194, 122, 0.55);
-background: rgba(30, 27, 11, 0.9); text-shadow: none; }
-a.btn.alt:hover, a.btn.alt:active { background: rgba(90, 80, 30, 0.9); color: #fff; }
+:root{--ink:#d8eeee;--dim:#88a9a9;--aqua:#7fe3df;--amber:#d5b56d;--red:#ef7777;--panel:rgba(3,15,18,.94)}
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02090b;color:var(--ink)}
+body{font-family:ui-monospace,'Courier New',monospace;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+button{font:inherit}button:focus-visible{outline:2px solid var(--aqua);outline-offset:3px}.hidden{display:none!important}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;outline:none}
+#vignette{position:fixed;inset:0;z-index:3;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,rgba(0,5,7,.38) 82%,rgba(0,2,3,.72) 100%)}
+#damage{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,transparent 35%,rgba(87,120,32,.58) 100%);transition:opacity .18s}
+#underwater{position:fixed;inset:0;z-index:4;pointer-events:none;opacity:0;background:linear-gradient(rgba(7,60,60,.08),rgba(2,35,35,.24));transition:opacity .2s}
+#cross{position:fixed;left:50%;top:50%;z-index:6;width:5px;height:5px;margin:-2px;border:1px solid rgba(215,240,235,.65);border-radius:50%;pointer-events:none}
+.screen{position:fixed;inset:0;z-index:30;display:flex;align-items:center;justify-content:center;overflow:auto;-webkit-overflow-scrolling:touch;background:radial-gradient(120% 100% at 50% 15%,rgba(13,46,48,.98),rgba(2,12,15,.99) 70%)}
+#start{z-index:40}.wrap{width:min(1050px,94vw);margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:1.4rem 2rem;padding:1.5rem 0}
+.brand{text-align:center;align-self:center}.kick{font-size:10px;letter-spacing:.28em;color:var(--dim);margin-bottom:1rem}.brand h1{font-weight:300;font-size:clamp(28px,5vw,52px);letter-spacing:.22em;margin:.2em 0;text-indent:.22em;color:#e6f5f1;text-shadow:0 0 22px rgba(87,211,199,.18)}
+.brand h2{font-size:clamp(12px,2vw,17px);font-weight:400;letter-spacing:.42em;color:var(--aqua);margin:.5em 0 1.4em;text-indent:.42em}.brand p{font-family:system-ui,sans-serif;font-weight:300;font-size:13px;line-height:1.65;color:#b7cdca;max-width:46ch;margin:0 auto 1.2em}.controls{font-size:11px;line-height:1.9;color:var(--dim);margin:1rem 0}.controls b{color:var(--aqua);font-weight:400}
+.cta{border:1px solid #a9d8d1;background:#c9e7e0;color:#071a1c;padding:.85em 1.5em;letter-spacing:.16em;font-size:12px;cursor:pointer;min-height:44px}.cta:hover:not(:disabled){background:#e6f5f1}.cta:disabled{opacity:.45;cursor:wait}.cta.secondary{background:rgba(10,38,40,.8);color:var(--ink);border-color:rgba(139,196,190,.45)}.cta.danger{background:rgba(62,18,20,.75);color:#ffd6d6;border-color:rgba(239,119,119,.5)}
+.menu{min-width:0}.tabs{display:flex;gap:5px;flex-wrap:wrap}.tab{border:1px solid rgba(128,181,177,.35);background:rgba(6,28,31,.8);color:#9fc2be;padding:.55em .85em;font-size:11px;letter-spacing:.1em;cursor:pointer;min-height:40px}.tab.on{background:#a9d8d1;color:#071a1c}.pane{border:1px solid rgba(128,181,177,.25);border-top:0;background:rgba(3,18,21,.8);padding:1rem;min-height:270px;max-height:55vh;overflow:auto;font-family:system-ui,sans-serif;font-size:13px;line-height:1.55;color:#b9cfcb}.pane h3{font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.2em;color:var(--aqua);font-weight:500;margin:.3em 0 .8em}.pane p{margin:.6em 0}.pane .warn{color:#d8c693}.pane .dev{color:#9edcb1}.stats{width:100%;border-collapse:collapse;font-family:ui-monospace,monospace;font-size:11px}.stats td{border-bottom:1px dotted rgba(134,181,177,.22);padding:.48em .2em}.stats tr:last-child td{border:0}.stats .done{color:#91d6b0}.stats .pending{color:#728f8c}.stats .devonly{color:#c8b47b}.foot{font-size:9px;letter-spacing:.13em;color:#65817f;text-align:center;margin-top:1rem}
+#hud{position:fixed;z-index:8;left:calc(12px + env(safe-area-inset-left,0px));top:calc(10px + env(safe-area-inset-top,0px));pointer-events:none;text-shadow:0 1px 4px #000;font-size:11px;letter-spacing:.1em;line-height:1.65}#hud .level{color:var(--aqua)}#sectorName{color:#c7d9d5}#valveHud{color:#d8c58f}#devHud{color:#9edcb1}
+#meters{position:fixed;z-index:8;left:calc(12px + env(safe-area-inset-left,0px));top:calc(84px + env(safe-area-inset-top,0px));width:min(230px,45vw);pointer-events:none}.meter-row{display:flex;align-items:center;gap:7px;font-size:9px;letter-spacing:.1em;color:#a9c2be;margin:5px 0}.meter{height:4px;background:rgba(132,173,168,.17);flex:1;overflow:hidden}.meter>i{display:block;height:100%;width:100%;background:#86bcb4;transform-origin:left;transition:transform .12s linear}.meter>i.infection{background:#a4c64f}.meter>i.oxygen{background:#6ea9d5}
+#inventory{position:fixed;z-index:8;right:calc(12px + env(safe-area-inset-right,0px));top:calc(62px + env(safe-area-inset-top,0px));font-size:10px;letter-spacing:.1em;color:#b9cfcb;text-align:right;pointer-events:none}#lightState.on{color:#e8ddb0}
+#objective{position:fixed;z-index:9;top:13%;left:50%;transform:translateX(-50%);width:min(680px,88vw);text-align:center;pointer-events:none;color:#d7e8e4;font-size:clamp(11px,1.7vw,14px);line-height:1.65;letter-spacing:.08em;text-shadow:0 2px 6px #000;transition:opacity .5s}#objective b{color:var(--aqua);font-weight:500}
+#prompt{position:fixed;z-index:9;bottom:23%;left:50%;transform:translateX(-50%);max-width:90vw;padding:.5em .9em;background:rgba(2,15,17,.8);border:1px solid rgba(130,194,187,.35);color:#d6eae5;text-align:center;font-size:clamp(10px,1.8vw,13px);letter-spacing:.09em;pointer-events:none;white-space:normal}
+#toast{position:fixed;z-index:15;bottom:14%;left:50%;transform:translateX(-50%);max-width:90vw;padding:.5em 1em;background:rgba(3,19,21,.9);border-left:2px solid var(--aqua);color:#d7e8e4;font-size:11px;line-height:1.5;letter-spacing:.07em;text-align:center;pointer-events:none}
+#waterState{position:fixed;z-index:8;bottom:calc(12px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);font-size:9px;letter-spacing:.18em;color:#8fbab5;pointer-events:none;text-shadow:0 1px 3px #000;white-space:nowrap}
+.iconbtn{position:fixed;z-index:45;width:44px;height:44px;border:1px solid rgba(135,191,185,.35);background:rgba(3,20,23,.72);color:#b9d8d3;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;touch-action:manipulation}#fsBtn{right:calc(8px + env(safe-area-inset-right,0px));top:calc(8px + env(safe-area-inset-top,0px))}#pauseBtn{right:calc(58px + env(safe-area-inset-right,0px));top:calc(8px + env(safe-area-inset-top,0px));z-index:12}#devToggle{right:calc(108px + env(safe-area-inset-right,0px));top:calc(8px + env(safe-area-inset-top,0px));z-index:20;color:#9edcb1}
+#qualityPanel{position:fixed;z-index:46;right:calc(8px + env(safe-area-inset-right,0px));top:calc(58px + env(safe-area-inset-top,0px));width:230px;padding:12px;background:var(--panel);border:1px solid rgba(135,191,185,.35);font-size:10px;color:#aac5c1}.qrow{display:flex;gap:4px;margin-top:8px}.qrow button{flex:1;padding:.65em .2em;background:#0a292b;color:#bcd5d0;border:1px solid #385d5a;font-size:10px;cursor:pointer}.qrow button.on{background:#a9d8d1;color:#071a1c}.qhint{margin-top:8px;line-height:1.5;color:#75918e}
+.modal{text-align:center;padding:1.2rem;width:min(520px,92vw);margin:auto}.modal h2{font-weight:300;letter-spacing:.3em;font-size:clamp(24px,5vw,40px);text-indent:.3em;margin:.3em 0 .7em}.modal p{font-family:system-ui,sans-serif;color:#aec5c1;font-size:13px;line-height:1.6}.modal .big{font-family:ui-monospace,monospace;color:#d7e8e4;letter-spacing:.12em}.modal .actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:1.2rem}.modal .actions button{flex:1 1 180px}#death{background:radial-gradient(circle,rgba(41,49,20,.97),rgba(7,10,7,.99))}#death h2{color:#d6dba4}#win{background:radial-gradient(circle,rgba(12,51,50,.97),rgba(2,13,15,.99))}#win h2{color:#a9e1d4}
+#devPanel{position:fixed;z-index:22;right:calc(8px + env(safe-area-inset-right,0px));top:calc(58px + env(safe-area-inset-top,0px));width:min(250px,86vw);max-height:75vh;overflow:auto;padding:12px;background:var(--panel);border:1px solid rgba(126,208,151,.4);color:#aad8b7;font-size:10px}.devgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px}.devgrid button{border:1px solid #3d6c4c;background:#102d1c;color:#b6dfc1;padding:.65em .3em;cursor:pointer;font-size:10px}.devgrid button.on{background:#376746;color:#fff}
+#touchUI{position:fixed;inset:0;z-index:11;pointer-events:none}#stick{position:fixed;width:116px;height:116px;border:1px solid rgba(137,209,200,.4);border-radius:50%;background:radial-gradient(circle,rgba(101,176,168,.13),rgba(3,19,22,.22));display:none;transform:translate(-50%,-50%);pointer-events:none}#knob{position:absolute;left:50%;top:50%;width:46px;height:46px;border-radius:50%;border:1px solid rgba(186,231,223,.55);background:rgba(91,153,147,.35);transform:translate(-50%,-50%)}
+.tbtn{position:fixed;width:66px;height:66px;border-radius:50%;border:1px solid rgba(138,205,197,.42);background:rgba(5,31,34,.5);color:#c6ded9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;pointer-events:auto;touch-action:none;font-size:18px;line-height:1}.tbtn small{font-size:8px;letter-spacing:.09em}.tbtn.on{background:rgba(76,134,126,.62);border-color:#a9d8d1}.tbtn:active{background:rgba(76,134,126,.62)}#btnUse{right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(174px + env(safe-area-inset-bottom,0px));border-color:rgba(218,190,118,.6);color:#e3cf96}#btnJump{right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(94px + env(safe-area-inset-bottom,0px))}#btnRun{right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-bottom,0px))}#btnLight{right:calc(96px + env(safe-area-inset-right,0px));bottom:calc(94px + env(safe-area-inset-bottom,0px))}#btnDown{right:calc(96px + env(safe-area-inset-right,0px));bottom:calc(14px + env(safe-area-inset-right,0px))}
+#fade{position:fixed;inset:0;z-index:25;background:#010708;opacity:0;pointer-events:none;transition:opacity .6s}#fade.on{opacity:1}
+@media(max-width:720px){.wrap{grid-template-columns:1fr;max-width:500px;gap:.8rem;padding:1rem 0}.brand h1{font-size:30px}.brand h2{margin-bottom:.8em}.brand p{display:none}.controls{margin:.5rem 0}.pane{min-height:180px;max-height:38vh}.foot{display:none}}
+@media(orientation:landscape) and (max-height:500px){.wrap{padding:.5rem 0;gap:.7rem 1.3rem}.brand h1{font-size:28px}.brand h2{font-size:11px;margin:.3em 0 .7em}.kick{margin-bottom:.4rem}.brand p{font-size:11px;margin-bottom:.4em}.controls{font-size:9px;margin:.4rem 0}.pane{max-height:66vh;min-height:210px;padding:.7rem}.cta{padding:.65em 1.2em}.foot{display:none}#objective{top:26%;width:min(560px,72vw)}.tbtn{width:58px;height:58px}#btnUse{bottom:calc(142px + env(safe-area-inset-bottom,0px))}#btnJump{bottom:calc(76px + env(safe-area-inset-bottom,0px))}#btnLight{right:calc(86px + env(safe-area-inset-right,0px));bottom:calc(76px + env(safe-area-inset-bottom,0px))}#btnDown{right:calc(86px + env(safe-area-inset-right,0px));bottom:calc(8px + env(safe-area-inset-bottom,0px))}#btnRun{bottom:calc(8px + env(safe-area-inset-bottom,0px))}#meters{top:70px}}
+@media(orientation:portrait){body.touch #objective{top:17%}body.touch #waterState{bottom:calc(8px + env(safe-area-inset-bottom,0px));left:12px;transform:none;font-size:8px}body.touch #meters{width:42vw}}
 </style>
+<script type="importmap">{"imports":{"three":"./vendor/three-0.186.0/three.module.js"}}</script>
 </head>
 <body>
-<div class="wrap">
-<div class="tape">CINTA #?? — SECTOR NO CONSTRUIDO</div>
-<h1>ALCANTARILLAS</h1>
-<div class="msg">LA GRIETA DE LOS POOLROOMS TE ENVIÓ A UN LUGAR EN PROCESO DE CONSTRUCCIÓ- VUELVE DESPUÉS<br><br>
-xd.<br>
-Volvé al HUB o al Nivel 0 pelotudo.</div>
-<div class="btns">
-<a class="btn" href="./the-hub.html">◀ VOLVER AL HUB SI ES QUE TIENES
-MIEDO DE EL 0 IDIOTA</a>
-<a class="btn alt" href="./index.html">▶ NIVEL 0</a>
-</div>
-<!-- [v1.8-DEV] CINTA PRIVILEGIADA — única forma de ver el ⚙/selector aquí -->
-<button id="cta372" type="button">▶ INSERTAR CINTA PRIVILEGIADA — DEV</button>
-<!-- [v1.7-DEV] selector de nivel (sector sin construir) — solo en modo Dev -->
-<button id="devBtn372" type="button" class="hidden">⚙ DEV</button>
-<div id="devPanel372">
-<div class="dt">■ CINTA PRIVILEGIADA — SELECTOR DE NIVEL</div>
-<div class="dl">
-<a class="dlv" href="./index.html">▶ NIVEL 0 — THE LOBBY</a>
-<a class="dlv" href="./level2.html">▶ NIVEL 2 — PIPE DREAMS</a>
-<a class="dlv" href="./level3.html">▶ NIVEL 3 — ERROR 404</a>
-<a class="dlv" href="./level31.html">▶ NIVEL 31 — ROLLER RINK</a>
-<a class="dlv" href="./level31_postblackout.html">▶ NIVEL 31 — POST-BLACKOUT</a>
-<a class="dlv" href="./poolrooms.html">▶ NIVEL 37 — POOLROOMS</a>
-<a class="dlv" href="./the-hub.html">▶ THE HUB</a>
-</div>
-</div>
-</div>
-<script>
-(function () {
-var b = document.getElementById('devBtn372');
-var p = document.getElementById('devPanel372');
-var cta = document.getElementById('cta372');
-var dev372 = false;   /* [v1.8-DEV] el selector SOLO existe tras insertar la cinta */
-function openPanel(open) {
-  if (open) { p.classList.add('open'); b.textContent = '✕ DEV'; }
-  else { p.classList.remove('open'); b.textContent = '⚙ DEV'; }
+<canvas id="c" aria-label="Nivel 37.2, vista en primera persona"></canvas>
+<div id="vignette"></div><div id="underwater"></div><div id="damage"></div><div id="cross" class="hidden"></div>
+<div id="hud" class="hidden"><div class="level">NIVEL 37.2 — ALCANTARILLAS</div><div id="sectorName">CÁMARA A</div><div id="valveHud">VÁLVULAS 0/4</div><div id="clock">00:00</div><div id="devHud" class="hidden">◆ CINTA DEV · SIN PROGRESO NORMAL</div></div>
+<div id="meters" class="hidden"><div class="meter-row"><span>AIRE</span><div class="meter"><i id="oxygenBar" class="oxygen"></i></div></div><div class="meter-row"><span>AGUANTE</span><div class="meter"><i id="staminaBar"></i></div></div><div class="meter-row hidden" id="infectionRow"><span>INFECCIÓN</span><div class="meter"><i id="infectionBar" class="infection"></i></div></div></div>
+<div id="inventory" class="hidden"><div id="lightState">LINTERNA APAGADA · F</div><div id="checkpoint">RETORNO: THE HUB</div></div>
+<div id="objective" class="hidden"></div><div id="prompt" class="hidden"></div><div id="toast" class="hidden"></div><div id="waterState" class="hidden"></div>
+<button id="pauseBtn" class="iconbtn hidden" aria-label="Pausa" title="Pausa">❚❚</button>
+<button id="fsBtn" class="iconbtn" aria-label="Pantalla completa" title="Pantalla completa" style="font-size:11px">FS</button>
+<button id="devToggle" class="iconbtn hidden" aria-label="Panel DEV" title="Panel DEV">⚙</button>
+<div id="qualityPanel" class="hidden">CALIDAD GRÁFICA<div class="qrow"><button data-q="-1">AUTO</button><button data-q="0">BAJA</button><button data-q="1">MEDIA</button><button data-q="2">ALTA</button></div><div class="qhint">AUTO reduce resolución, niebla y partículas si el dispositivo no sostiene el ritmo.</div></div>
+<div id="devPanel" class="hidden">◆ MODO DEV — 37.2<div class="devgrid"><button data-tp="0">TP CÁMARA A</button><button data-tp="1">TP CÁMARA B</button><button data-tp="2">TP CÁMARA C</button><button data-tp="3">TP TOBOGÁN</button><button id="devSector">COMPLETAR SECTOR</button><button id="devFly">VUELO: OFF</button></div><p>Las válvulas activadas aquí no se guardan como progreso normal. La victoria se marca SOLO DEV.</p></div>
+<div id="touchUI" class="hidden"><div id="stick"><div id="knob"></div></div><button id="btnUse" class="tbtn hidden" aria-label="Usar">E<small>USAR</small></button><button id="btnJump" class="tbtn" aria-label="Saltar o subir">⤒<small id="jumpLabel">SALTAR</small></button><button id="btnRun" class="tbtn" aria-label="Correr">⚡<small>CORRER</small></button><button id="btnLight" class="tbtn" aria-label="Linterna">◐<small>LUZ</small></button><button id="btnDown" class="tbtn hidden" aria-label="Bajar en el agua">↓<small>BAJAR</small></button></div>
+<div id="fade"></div>
+<section id="start" class="screen"><div class="wrap"><div class="brand"><div class="kick">BACKROOMS · CINTA #37.2 · REGISTRO DE MANTENIMIENTO</div><h1>ALCANTARILLAS</h1><h2>DARK POOLROOMS</h2><p>El drenaje no termina en una tubería. Termina en una red de piscinas enterradas donde cada tanque alimenta otro sifón.</p><div class="controls" id="deskControls"><b>Ratón</b> mirar · <b>WASD</b> mover · <b>Shift</b> correr · <b>Espacio</b> saltar / subir<br><b>C</b> bajar en agua · <b>E</b> usar · <b>F</b> linterna · <b>Esc</b> pausa</div><div class="controls hidden" id="touchControls"><b>Joystick</b> mover · <b>arrastrar</b> mirar · <b>USAR</b> válvulas<br><b>⤒</b> saltar / subir · <b>↓</b> bajar en agua · <b>◐</b> linterna</div><button id="enter" class="cta" disabled>CARGANDO EL SECTOR…</button><div class="foot">THREE.JS LOCAL · AUDIO Y TEXTURAS PROCEDURALES · SIN CONEXIÓN OBLIGATORIA</div></div><div class="menu"><div class="tabs"><button class="tab on">INFORME</button><button class="tab">PROGRESO</button><button class="tab">CINTA DEV</button></div><div class="pane" id="panes"><div><h3>■ INFORME DE INCIDENTE</h3><p>Tres cámaras de compensación mantienen el nivel por debajo de Poolrooms. Cada tanque refleja las válvulas activadas y controla una compuerta.</p><h3>■ PROCEDIMIENTO</h3><p>Acciona <b>4 / 3 / 7 válvulas</b>. Cuando el tanque llegue al máximo, espera la equalización y cruza el sifón sumergido. El agua profunda oculta tu rastro; el agua verde infecta.</p><p class="warn">No hay señal. No hay mapa. Las luces rojas marcan válvulas pendientes; las verdes ya no vuelven atrás.</p></div><div class="hidden"><h3>■ PROGRESO LOCAL COMPARTIDO</h3><table class="stats"><tbody id="statsRows"></tbody></table><p id="statsMeta"></p><p>Las válvulas resisten muerte y reintento durante esta sesión. La recarga de la cinta inicia una expedición nueva.</p></div><div class="hidden"><h3>■ CINTA PRIVILEGIADA</h3><p class="dev">Activa teletransportes, vuelo y cierre de sectores para inspección. El modo DEV impide daño letal y no registra intentos ni muertes.</p><p class="warn">Completar con esta cinta solo añade «37.2» a levelsCompletedDev. No desbloquea progreso normal ni récords.</p><button id="devStart" class="cta secondary">▶ INSERTAR CINTA PRIVILEGIADA</button></div></div></div></div></section>
+<section id="pause" class="screen hidden"><div class="modal"><h2>PAUSA</h2><p class="big" id="pauseInfo">CÁMARA A · 00:00</p><p>La simulación y el temporizador están detenidos.</p><div class="actions"><button id="resume" class="cta">CONTINUAR</button><button id="pauseQuality" class="cta secondary">CALIDAD</button><button id="pauseMenu" class="cta secondary">VOLVER AL INFORME</button></div></div></section>
+<section id="death" class="screen hidden"><div class="modal"><h2>SEÑAL PERDIDA</h2><p class="big" id="deathReason">EL CLUMP TE ENCONTRÓ</p><p id="deathDetail">Las válvulas completadas siguen abiertas. Reapareces al inicio de esta cámara.</p><div class="actions"><button id="retry" class="cta">REINTENTAR CÁMARA</button><button id="deathMenu" class="cta secondary">VOLVER AL INFORME</button></div></div></section>
+<section id="win" class="screen hidden"><div class="modal"><h2>DRENAJE SUPERADO</h2><p class="big" id="winStats">14/14 VÁLVULAS · 00:00</p><p id="winText">El tobogán devuelve la cinta al nexo. La compuerta queda abierta detrás de ti.</p><div class="actions"><button id="returnOrigin" class="cta">VOLVER A THE HUB</button><button id="returnHub" class="cta secondary">THE HUB</button><button id="replay" class="cta secondary">NUEVA EXPEDICIÓN</button></div></div></section>
+<script type="module">
+import * as THREE from 'three';
+
+/* Nivel 37.2 — geometría, texturas y audio procedurales; sin red obligatoria. */
+const $=id=>document.getElementById(id), clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const QP=new URLSearchParams(location.search), NOFOCUS=QP.has('nofocus')||QP.has('qa');
+const IS_TOUCH=QP.get('touchemu')==='1'||matchMedia('(pointer: coarse)').matches||('ontouchstart'in window&&navigator.maxTouchPoints>0);
+document.body.classList.toggle('touch',IS_TOUCH);
+const canvas=$('c'), errors=[];
+addEventListener('error',e=>{errors.push(String(e.message||e));console.error('[37.2]',e.message)});
+addEventListener('unhandledrejection',e=>{errors.push('promise: '+e.reason);console.error('[37.2]',e.reason)});
+const SAVE_KEY='BACKROOMS_SAVE_V1', LEVEL_ID='37.2';
+const LEVELS=[['0','NIVEL 0 — THE LOBBY'],['2','NIVEL 2 — PIPE DREAMS'],['3','NIVEL 3 — ERROR 404'],['31','NIVEL 31 — ROLLER RINK'],['31_post','NIVEL 31 · POST-BLACKOUT'],['37','NIVEL 37 — POOLROOMS'],['37.2','NIVEL 37.2 — ALCANTARILLAS']];
+function defaultSave(){return{shards:{},lives:{},levelsCompleted:[],levelsCompletedDev:[],devNoticeShown:false,bestTime:{},lastTime:{},attempts:{},deaths:{},wins:{},items:{},hasVisitedHub:false,totalAttempts:0,totalDeaths:0,totalWins:0,totalShards:0,lastVisitedAt:null}}
+let save=defaultSave();
+function loadSave(){try{const raw=localStorage.getItem(SAVE_KEY);if(!raw)return;const p=JSON.parse(raw);if(p&&typeof p==='object'){save=Object.assign(defaultSave(),p);for(const k of['shards','lives','bestTime','lastTime','attempts','deaths','wins','items'])save[k]=Object.assign({},save[k]||{});if(!Array.isArray(save.levelsCompleted))save.levelsCompleted=[];if(!Array.isArray(save.levelsCompletedDev))save.levelsCompletedDev=[]}}catch(_){save=defaultSave()}}
+function persistSave(){try{save.lastVisitedAt=new Date().toISOString();localStorage.setItem(SAVE_KEY,JSON.stringify(save))}catch(_){}}
+const completed=id=>save.levelsCompleted.includes(id), completedDev=id=>(save.levelsCompletedDev||[]).includes(id);
+function markDev(id){if(!save.levelsCompletedDev.includes(id))save.levelsCompletedDev.push(id);persistSave()}
+function devNotice(){if(save.devNoticeShown)return;save.devNoticeShown=true;persistSave();toast('CINTA DEV: la victoria se registrará por separado; no cuenta como progreso normal.',6000)}
+function markComplete(id,time){if(devMode){markDev(id);return}const t=Math.max(0,Math.floor(time));if(!completed(id))save.levelsCompleted.push(id);if(typeof save.bestTime[id]!=='number'||t<save.bestTime[id])save.bestTime[id]=t;save.lastTime[id]=t;save.lives[id]=1;save.wins[id]=(save.wins[id]||0)+1;save.totalWins++;persistSave()}
+function recordAttempt(){if(devMode)return;save.attempts[LEVEL_ID]=(save.attempts[LEVEL_ID]||0)+1;save.totalAttempts++;persistSave()}
+function recordDeath(){if(devMode)return;save.deaths[LEVEL_ID]=(save.deaths[LEVEL_ID]||0)+1;save.totalDeaths++;save.lastTime[LEVEL_ID]=Math.floor(playTime);persistSave()}
+function fmt(s){s=Math.max(0,Math.floor(s));return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+loadSave();
+const ORIGIN=QP.get('from')==='poolrooms'?'poolrooms':'hub';
+let renderer,scene,camera,clock,started=false,state='menu',devMode=!!window.__BACKROOMS_DEV&&QP.get('dev')==='1';
+let playTime=0,time=0,frames=0,currentSector=0,deathCount=0,activeValve=null,slideT=0,navUrl='';
+const player={x:0,z:-4,feet:0,vy:0,yaw:0,pitch:0,bob:0,spd:0,grounded:true,coyote:0};
+const keys={}, input={joyX:0,joyY:0,run:false,up:false,down:false,jumpQueued:false};
+let flashlight=false,infection=0,oxygen=1,stamina=1,waterContact=null,wasWet=false,promptAction=null;
+let toastTimer=0,objectiveTimer=0,hudAccum=0,qualityAccum=0,fpsEMA=60,fpsGood=0;
+const EYE=1.48,RADIUS=.29,STEP=.32;
+const SECTORS=[
+ {id:'A',name:'CÁMARA A — GALERÍA DE REJAS',short:'CÁMARA A',minX:-12,maxX:12,minZ:-32,maxZ:0,need:4,start:{x:0,z:-4,yaw:0},enemy:{x:9,z:-19},tank:{x:0,z:-20},connector:{minZ:-44,maxZ:-32},visited:false},
+ {id:'B',name:'CÁMARA B — CUENCA INFECTADA',short:'CÁMARA B',minX:-12,maxX:12,minZ:-76,maxZ:-44,need:3,start:{x:0,z:-46,yaw:0},enemy:{x:-10,z:-70},tank:{x:-10,z:-61},connector:{minZ:-88,maxZ:-76},visited:false},
+ {id:'C',name:'CÁMARA C — COLECTOR PROFUNDO',short:'CÁMARA C',minX:-14,maxX:14,minZ:-124,maxZ:-88,need:7,start:{x:0,z:-90,yaw:0},enemy:{x:11,z:-112},enemy2:{x:-11,z:-98},tank:{x:0,z:-106},connector:{minZ:-134,maxZ:-124},visited:false}
+];
+const valves=[],waters=[],colliders=[],tanks=[],gates=[],sectorRuntime=SECTORS.map(()=>({fill:0,equalizing:false,equalT:0,open:false}));
+const batch=new Map(),pipeBatch=[];
+let tileMat,metalMat,darkMat,concreteMat,waterMats=[],flashSpot,flashNear,flashModel;
+let enemy,enemyModel,enemyArms=[],enemyPath=[],enemyPathI=0,enemyMode='patrol',enemySeen=0,enemyRepath=0,enemyDelay=7,enemyTarget=null,enemyEnabled=true;
+let splashGeo,splashPoints,splashData=[],audio;
+
+/* ---------- Renderer, calidad y materiales de azulejo en espacio-mundo ---------- */
+const Q={tier:IS_TOUCH?1:2,pref:-1,scales:[.56,.76,1],fog:[.041,.033,.026]};
+try{const q=parseInt(localStorage.getItem('dark37.qpref'),10);if(q>=0&&q<=2)Q.pref=q}catch(_){}
+function initRenderer(){
+ renderer=new THREE.WebGLRenderer({canvas,antialias:false,powerPreference:'high-performance'});renderer.shadowMap.enabled=false;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;renderer.outputColorSpace=THREE.SRGBColorSpace;
+ renderer._basePR=Math.min(devicePixelRatio||1,2);renderer.setPixelRatio(renderer._basePR*Q.scales[Q.tier]);renderer.setSize(innerWidth,innerHeight);
+ scene=new THREE.Scene();scene.background=new THREE.Color(0x020b0d);scene.fog=new THREE.FogExp2(0x031013,Q.fog[Q.tier]);
+ camera=new THREE.PerspectiveCamera(72,innerWidth/innerHeight,.06,90);scene.add(camera);
+ scene.add(new THREE.HemisphereLight(0x6b9292,0x071011,.34));scene.add(new THREE.AmbientLight(0x355556,.22));
+ flashSpot=new THREE.SpotLight(0xd8eee0,42,25,.48,.58,1.45);flashSpot.position.set(.16,-.12,0);flashSpot.target.position.set(0,-.05,-5);camera.add(flashSpot,flashSpot.target);
+ flashNear=new THREE.PointLight(0xa9c9bd,.48,3.5,1.5);camera.add(flashNear);
+ clock=new THREE.Clock();applyTier(Q.pref>=0?Q.pref:Q.tier,true);
+ addEventListener('resize',resize);addEventListener('orientationchange',()=>setTimeout(resize,160));
 }
-if (cta && b && p) cta.addEventListener('click', function (e) {
-  e.stopPropagation();
-  if (dev372) return;
-  dev372 = true;
-  cta.classList.add('hidden');
-  b.classList.remove('hidden');
-  openPanel(true);
-});
-if (b && p) b.addEventListener('click', function (e) {
-  e.stopPropagation();
-  openPanel(!p.classList.contains('open'));
-});
-})();
+function resize(){if(!renderer)return;camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)}
+function applyTier(t,force=false){t=clamp(t,0,2);if(!force&&t===Q.tier)return;Q.tier=t;renderer.setPixelRatio(renderer._basePR*Q.scales[t]);renderer.setSize(innerWidth,innerHeight);scene.fog.density=Q.fog[t];for(const m of waterMats)m.uniforms.uQual.value=t;if(splashPoints)splashPoints.visible=t>0;syncQuality()}
+function syncQuality(){document.querySelectorAll('#qualityPanel [data-q]').forEach(b=>b.classList.toggle('on',+b.dataset.q===Q.pref))}
+function qualityTick(dt){const f=clamp(1/Math.max(dt,.0001),0,120);fpsEMA+=(f-fpsEMA)*.045;if(Q.pref>=0)return;qualityAccum+=dt;if(qualityAccum<2)return;qualityAccum=0;if(fpsEMA<27&&Q.tier>0){applyTier(Q.tier-1);fpsGood=0}else if(fpsEMA>54&&Q.tier<2){fpsGood+=2;if(fpsGood>=8){applyTier(Q.tier+1);fpsGood=0}}else fpsGood=0}
+function makeTileMaterial(color){const m=new THREE.MeshStandardMaterial({color,roughness:.42,metalness:.02});m.onBeforeCompile=sh=>{
+ sh.vertexShader=sh.vertexShader.replace('#include <common>','#include <common>\nvarying vec3 vTilePos;varying vec3 vTileNorm;').replace('#include <begin_vertex>',`#include <begin_vertex>
+#ifdef USE_INSTANCING
+vec4 tileWorld=modelMatrix*instanceMatrix*vec4(transformed,1.0);vTileNorm=normalize(mat3(modelMatrix)*mat3(instanceMatrix)*objectNormal);
+#else
+vec4 tileWorld=modelMatrix*vec4(transformed,1.0);vTileNorm=normalize(mat3(modelMatrix)*objectNormal);
+#endif
+vTilePos=tileWorld.xyz;`);
+ sh.fragmentShader=sh.fragmentShader.replace('#include <common>',`#include <common>
+varying vec3 vTilePos;varying vec3 vTileNorm;
+float tileHash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}`).replace('#include <color_fragment>',`#include <color_fragment>
+{
+ vec3 tn=normalize(vTileNorm);vec2 tuv;
+ if(abs(tn.y)>.58)tuv=vTilePos.xz;else if(abs(tn.x)>abs(tn.z))tuv=vTilePos.zy;else tuv=vTilePos.xy;
+ tuv*=6.25;vec2 fw=max(fwidth(tuv),vec2(.0005));vec2 cell=fract(tuv);vec2 edge=min(cell,1.0-cell)/fw;
+ float grout=1.0-clamp(min(edge.x,edge.y),0.0,1.0);grout*=1.0-smoothstep(.35,1.2,max(fw.x,fw.y));
+ float variation=.91+.14*tileHash(floor(tuv));float damp=.96+.04*sin(vTilePos.x*.73+vTilePos.z*.41);
+ vec3 ceramic=vec3(variation*damp);vec3 mortar=vec3(.29,.37,.36);
+ diffuseColor.rgb*=mix(ceramic,mortar,grout*.88);
+}`).replace('#include <roughnessmap_fragment>','#include <roughnessmap_fragment>\nroughnessFactor=clamp(roughnessFactor,0.32,0.72);');
+ };return m}
+function makeWaterMaterial(color,toxic=false){const m=new THREE.ShaderMaterial({transparent:true,depthWrite:false,side:THREE.DoubleSide,fog:true,uniforms:{uTime:{value:0},uColor:{value:new THREE.Color(color)},uToxic:{value:toxic?1:0},uQual:{value:Q.tier},...THREE.UniformsUtils.clone(THREE.UniformsLib.fog)},vertexShader:`varying vec3 vW;varying float vWave;uniform float uTime;uniform float uQual;
+#include <fog_pars_vertex>
+void main(){vec3 p=position;float a=sin(p.x*1.9+uTime*1.1)*cos(p.y*1.3-uTime*.8);float b=sin((p.x+p.y)*3.1-uTime*1.6);vWave=(a+b*.35)*(.018+.008*uQual);p.z+=vWave;vec4 w=modelMatrix*vec4(p,1.0);vW=w.xyz;vec4 mvPosition=viewMatrix*w;gl_Position=projectionMatrix*mvPosition;
+#include <fog_vertex>
+}`,fragmentShader:`varying vec3 vW;varying float vWave;uniform float uTime;uniform vec3 uColor;uniform float uToxic;uniform float uQual;
+#include <fog_pars_fragment>
+void main(){vec3 V=normalize(cameraPosition-vW);float fres=pow(1.0-clamp(abs(V.y),0.0,1.0),2.2);float r=sin(vW.x*4.2+uTime*1.3)*sin(vW.z*3.7-uTime*.9);float foam=smoothstep(.86,1.0,r)*.12*uQual;vec3 col=uColor*(.62+vWave*4.0)+vec3(.16,.32,.30)*(fres*.32+foam);col=mix(col,vec3(.24,.39,.08),uToxic*.45);float alpha=.56+fres*.18+uToxic*.08;gl_FragColor=vec4(col,alpha);
+#include <tonemapping_fragment>
+#include <colorspace_fragment>
+#include <fog_fragment>
+}`});waterMats.push(m);return m}
+function initMaterials(){tileMat=makeTileMaterial(0x789a96);concreteMat=makeTileMaterial(0x526d69);metalMat=new THREE.MeshStandardMaterial({color:0x526967,roughness:.32,metalness:.82});darkMat=new THREE.MeshStandardMaterial({color:0x101c1d,roughness:.74,metalness:.25})}
+
+/* ---------- Primitivas estáticas por lotes y colisiones AABB ---------- */
+function addBox(x,y,z,w,h,d,mat=tileMat,collision=true,color=null){if(!batch.has(mat))batch.set(mat,[]);batch.get(mat).push({x,y,z,w,h,d,color});if(collision){const c={x0:x-w/2,x1:x+w/2,y0:y-h/2,y1:y+h/2,z0:z-d/2,z1:z+d/2,active:true};colliders.push(c);return c}return null}
+function floorRect(x0,x1,z0,z1,top=0,mat=tileMat){return addBox((x0+x1)/2,top-.16,(z0+z1)/2,x1-x0,.32,z1-z0,mat,true)}
+function pipe(x0,y0,z0,x1,y1,z1,r=.07){pipeBatch.push({a:new THREE.Vector3(x0,y0,z0),b:new THREE.Vector3(x1,y1,z1),r})}
+function flushBatches(){const unit=new THREE.BoxGeometry(1,1,1),dummy=new THREE.Object3D();for(const[mat,items]of batch){const mesh=new THREE.InstancedMesh(unit,mat,items.length);items.forEach((b,i)=>{dummy.position.set(b.x,b.y,b.z);dummy.scale.set(b.w,b.h,b.d);dummy.rotation.set(0,0,0);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix);mesh.setColorAt(i,new THREE.Color(b.color||0xffffff))});mesh.instanceMatrix.needsUpdate=true;if(mesh.instanceColor)mesh.instanceColor.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh)}batch.clear();
+ if(pipeBatch.length){const geo=new THREE.CylinderGeometry(1,1,1,8,1),mesh=new THREE.InstancedMesh(geo,metalMat,pipeBatch.length),up=new THREE.Vector3(0,1,0);pipeBatch.forEach((p,i)=>{const dir=p.b.clone().sub(p.a),len=dir.length();dummy.position.copy(p.a).add(p.b).multiplyScalar(.5);dummy.quaternion.setFromUnitVectors(up,dir.normalize());dummy.scale.set(p.r,len,p.r);dummy.updateMatrix();mesh.setMatrixAt(i,dummy.matrix)});mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();scene.add(mesh);pipeBatch.length=0}}
+function collisionAt(x,z,feet,r=RADIUS){const head=feet+1.58;for(const b of colliders){if(!b.active||b.y0>head||b.y1<=feet+STEP)continue;if(x+r>b.x0&&x-r<b.x1&&z+r>b.z0&&z-r<b.z1)return b}return null}
+function groundAt(x,z,refFeet){let g=-4;const r=.22;for(const b of colliders){if(!b.active||b.y1>refFeet+STEP)continue;if(x+r>b.x0&&x-r<b.x1&&z+r>b.z0&&z-r<b.z1&&b.y1>g)g=b.y1}return g}
+function ceilingAt(x,z,oldHead,newHead){let hit=Infinity;const r=.22;for(const b of colliders){if(!b.active||b.y0<oldHead-.06||b.y0>newHead)continue;if(x+r>b.x0&&x-r<b.x1&&z+r>b.z0&&z-r<b.z1)hit=Math.min(hit,b.y0)}return hit}
+function lineBlocked(x0,z0,x1,z1){const dx=x1-x0,dz=z1-z0;for(const b of colliders){if(!b.active||b.y0>1.9||b.y1<.15)continue;let t0=0,t1=1;for(const q of[[x0,dx,b.x0,b.x1],[z0,dz,b.z0,b.z1]]){if(Math.abs(q[1])<1e-7){if(q[0]<q[2]||q[0]>q[3]){t0=2;break}}else{let a=(q[2]-q[0])/q[1],c=(q[3]-q[0])/q[1];if(a>c){const tmp=a;a=c;c=tmp}t0=Math.max(t0,a);t1=Math.min(t1,c);if(t0>t1)break}}if(t0<=t1&&t1>.02&&t0<.98)return true}return false}
+function wallX(x,z0,z1,y0=0,h=5.5){addBox(x,y0+h/2,(z0+z1)/2,.34,h,z1-z0,tileMat,true)}
+function wallZ(z,x0,x1,y0=0,h=5.5){addBox((x0+x1)/2,y0+h/2,z,x1-x0,h,.34,tileMat,true)}
+function wallDoorZ(z,x0,x1,door=4){const l=(x0+x1-door)/2,r=(x0+x1+door)/2;wallZ(z,x0,l,-2.2,7.7);wallZ(z,r,x1,-2.2,7.7);addBox((x0+x1)/2,4.15,z,door,2.7,.34,tileMat,true)}
+function shell(s,entryDoor=true){wallX(s.minX,s.minZ,s.maxZ,-2.2,7.7);wallX(s.maxX,s.minZ,s.maxZ,-2.2,7.7);wallDoorZ(s.minZ,s.minX,s.maxX);if(entryDoor)wallDoorZ(s.maxZ,s.minX,s.maxX);else wallZ(s.maxZ,s.minX,s.maxX,0,5.5);addBox((s.minX+s.maxX)/2,5.65,(s.minZ+s.maxZ)/2,s.maxX-s.minX,.3,s.maxZ-s.minZ,concreteMat,true)}
+function addLightFixture(x,y,z,color=0x7ca99d){const mat=new THREE.MeshBasicMaterial({color,toneMapped:false});addBox(x,y,z,1.4,.06,.24,mat,false);const l=new THREE.PointLight(color,7.5,17,1.8);l.position.set(x,y-.2,z);scene.add(l)}
+function signTexture(title,sub,color='#9ed8cd'){const c=document.createElement('canvas');c.width=512;c.height=160;const g=c.getContext('2d');g.fillStyle='#071315';g.fillRect(0,0,512,160);g.strokeStyle='#395d59';g.lineWidth=5;g.strokeRect(5,5,502,150);g.fillStyle=color;g.textAlign='center';g.font='bold 36px monospace';g.fillText(title,256,68);g.fillStyle='#779a94';g.font='22px monospace';g.fillText(sub,256,112);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t}
+function addSign(title,sub,x,y,z,ry=0,w=3.6){const mat=new THREE.MeshBasicMaterial({map:signTexture(title,sub),side:THREE.DoubleSide,toneMapped:false});const m=new THREE.Mesh(new THREE.PlaneGeometry(w,w*.3125),mat);m.position.set(x,y,z);m.rotation.y=ry;scene.add(m);return m}
+
+/* ---------- Construcción del mundo: tres cámaras, tanques y sifones ---------- */
+function addWater(x0,x1,z0,z1,floor,level,type='safe',sector=0,connector=false){
+ const mat=makeWaterMaterial(type==='toxic'?0x47642d:0x216b68,type==='toxic');
+ const mesh=new THREE.Mesh(new THREE.PlaneGeometry(x1-x0,z1-z0,10,10),mat);mesh.rotation.x=-Math.PI/2;mesh.position.set((x0+x1)/2,level,(z0+z1)/2);mesh.renderOrder=2;scene.add(mesh);
+ const w={x0,x1,z0,z1,floor,level,initial:level,target:level,type,sector,connector,mesh};waters.push(w);return w;
+}
+function buildValve(sector,id,x,y,z,ry=0,free=false){
+ const group=new THREE.Group();group.position.set(x,y,z);group.rotation.y=ry;scene.add(group);
+ const pipeMat=metalMat,red=new THREE.MeshStandardMaterial({color:0x8f2824,roughness:.48,metalness:.62});
+ const stem=new THREE.Mesh(new THREE.CylinderGeometry(.085,.085,.48,10),pipeMat);stem.rotation.x=Math.PI/2;stem.position.z=-.18;group.add(stem);
+ const collar=new THREE.Mesh(new THREE.CylinderGeometry(.15,.15,.09,12),pipeMat);collar.rotation.x=Math.PI/2;collar.position.z=.035;group.add(collar);
+ const wheel=new THREE.Group();wheel.position.z=.11;group.add(wheel);
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(.29,.042,8,24),red);wheel.add(ring);
+ for(let i=0;i<4;i++){const spoke=new THREE.Mesh(new THREE.BoxGeometry(.47,.035,.035),red);spoke.rotation.z=i*Math.PI/4;wheel.add(spoke)}
+ const hub=new THREE.Mesh(new THREE.CylinderGeometry(.075,.075,.08,12),red);hub.rotation.x=Math.PI/2;wheel.add(hub);
+ const lampMat=new THREE.MeshBasicMaterial({color:0xe05145,toneMapped:false});const lamp=new THREE.Mesh(new THREE.SphereGeometry(.045,8,6),lampMat);lamp.position.set(.43,.34,.02);group.add(lamp);
+ if(free){pipe(x,y-.95,z,x,y-.12,z,.085);addBox(x,y-1.08,z,.38,.18,.38,metalMat,false)}
+ const v={sector,id,group,wheel,lamp,on:false,pos:new THREE.Vector3(x,y,z),baseRot:0};valves.push(v);return v;
+}
+function buildTank(s,si){
+ const {x,z}=s.tank,g=new THREE.Group();g.position.set(x,0,z);scene.add(g);
+ const glass=new THREE.Mesh(new THREE.BoxGeometry(2.15,2.65,1.8),new THREE.MeshStandardMaterial({color:0x789b91,transparent:true,opacity:.16,roughness:.12,metalness:.15,depthWrite:false}));glass.position.y=1.4;g.add(glass);
+ colliders.push({x0:x-1.12,x1:x+1.12,y0:0,y1:2.8,z0:z-.95,z1:z+.95,active:true});
+ for(const xx of[-1.12,1.12])for(const zz of[-.95,.95])addBox(x+xx,1.4,z+zz,.09,2.8,.09,metalMat,false);
+ addBox(x,.08,z,2.35,.16,2.05,metalMat,false);addBox(x,2.77,z,2.35,.12,2.05,metalMat,false);
+ const water=new THREE.Mesh(new THREE.BoxGeometry(1.92,1,1.57),new THREE.MeshStandardMaterial({color:0x2d7770,transparent:true,opacity:.7,roughness:.2,metalness:.05,depthWrite:false}));g.add(water);
+ for(const xx of[-.36,.36])pipe(x+xx,.12,z+1.09,x+xx,2.85,z+1.09,.035);
+ for(let i=0;i<9;i++)pipe(x-.36,.28+i*.29,z+1.09,x+.36,.28+i*.29,z+1.09,.027);
+ const lampMat=new THREE.MeshBasicMaterial({color:0xe05a45,toneMapped:false});const lamp=new THREE.Mesh(new THREE.SphereGeometry(.075,8,6),lampMat);lamp.position.set(0,2.88,1.02);g.add(lamp);
+ const tankSign=addSign('TANQUE '+s.id,'0 / '+s.need+' · COMPENSACIÓN',x,3.35,z+.97,0,2.5);
+ const t={group:g,water,lamp,sector:si,sign:tankSign};tanks.push(t);return t;
+}
+function buildGate(s,si){
+ const group=new THREE.Group();group.position.set(0,0,s.minZ+.03);scene.add(group);
+ for(let i=-3;i<=3;i++){const bar=new THREE.Mesh(new THREE.BoxGeometry(.12,3.45,.16),metalMat);bar.position.set(i*.52,1.5,0);group.add(bar)}
+ for(const y of[-.05,1.2,2.85]){const bar=new THREE.Mesh(new THREE.BoxGeometry(3.65,.14,.18),metalMat);bar.position.set(0,y,0);group.add(bar)}
+ const collider={x0:-1.95,x1:1.95,y0:-.25,y1:3.25,z0:s.minZ-.14,z1:s.minZ+.18,active:true};colliders.push(collider);
+ const gate={group,collider,lift:0,sector:si};gates.push(gate);return gate;
+}
+function buildConnector(s,si){
+ const c=s.connector,min=c.minZ,max=c.maxZ;
+ floorRect(-2,2,min+3,max-3,-2.2,concreteMat);
+ for(let i=0;i<10;i++){
+  const zA=max-i*.3,zB=max-(i+1)*.3;floorRect(-2,2,zB,zA,-i*.22,concreteMat);
+  const zC=min+i*.3,zD=min+(i+1)*.3;floorRect(-2,2,zC,zD,-i*.22,concreteMat);
+ }
+ wallX(-2,min,max,-2.2,5.4);wallX(2,min,max,-2.2,5.4);
+ addBox(0,1.45,(min+max)/2,4,3.1,max-min-6,concreteMat,true);
+ addBox(0,3.15,(min+max)/2,4,.3,max-min,concreteMat,true);
+ const w=addWater(-1.84,1.84,min+.05,max-.05,-2.2,-1.25,'safe',si,true);w.target=-1.25;s.connectorWater=w;
+ s.connectorSign=addSign('SIFÓN '+s.id,'COMPUERTA BLOQUEADA',0,2.25,max-.2,0,2.8);
+}
+function buildSectorA(s){
+ floorRect(-12,12,-6,0);floorRect(-12,12,-32,-28);floorRect(-12,-7.5,-28,-6);floorRect(7.5,12,-28,-6);floorRect(-2,2,-28,-6);
+ floorRect(-7.5,7.5,-15,-13);floorRect(-7.5,7.5,-25,-23);
+ for(const r of[[-7.5,-2],[2,7.5]]){floorRect(r[0],r[1],-28,-6,-1.8,concreteMat);addWater(r[0]+.04,r[1]-.04,-27.95,-6.05,-1.8,-.35,'safe',0)}
+ for(const x of[-7.5,-2,2,7.5])for(const z of[-6,-28])addBox(x,2.5,z,.38,5,.38,tileMat,true);
+ for(const x of[-10.8,10.8]){pipe(x,3.7,-3,x,3.7,-29,.11);for(const z of[-8,-19,-27])pipe(x,0,z,x,3.7,z,.07)}
+ buildValve(0,'A1',-11.72,1.25,-10,Math.PI/2);buildValve(0,'A2',11.72,1.25,-11,-Math.PI/2);buildValve(0,'A3',-11.72,1.25,-25,Math.PI/2);buildValve(0,'A4',0,1.25,-26,0,true);
+ addLightFixture(0,5.35,-5);addSign('CÁMARA A','4 VÁLVULAS · TANQUE → SIFÓN',0,3.7,-.22,Math.PI,4.2);
+}
+function buildSectorB(s){
+ floorRect(-12,12,-52,-44);floorRect(-12,12,-76,-68);floorRect(-12,-8,-68,-52);floorRect(8,12,-68,-52);
+ floorRect(-8,8,-68,-52,-1.9,concreteMat);addWater(-7.96,7.96,-67.96,-52.04,-1.9,-.25,'toxic',1);
+ const platforms=[[-53.5,.1],[-57,.22],[-60.5,.35],[-64,.22],[-67.5,.1]];
+ for(const[z,h]of platforms){floorRect(-1.2,1.2,z-1.2,z+1.2,h,tileMat);for(const x of[-1.05,1.05])addBox(x,h+.12,z,.12,.24,2.25,metalMat,false)}
+ buildValve(1,'B1',-11.72,1.25,-49,Math.PI/2);buildValve(1,'B2',11.72,1.25,-72,-Math.PI/2);buildValve(1,'B3',.65,1.6,-60.5,-Math.PI/2,true);
+ for(const x of[-10.8,10.8])pipe(x,3.5,-46,x,3.5,-74,.12);
+ addLightFixture(0,5.35,-47,0x809b87);addSign('CÁMARA B','3 VÁLVULAS · AGUA VERDE = INFECCIÓN',0,3.7,-44.22,Math.PI,4.2);
+ // Vapor de la cuenca: puntos ligeros, sin texturas externas.
+ const n=34,pos=new Float32Array(n*3);for(let i=0;i<n;i++){pos[i*3]=(Math.random()-.5)*14;pos[i*3+1]=-.05+Math.random()*.65;pos[i*3+2]=-53-Math.random()*14}
+ const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(pos,3));const pts=new THREE.Points(geo,new THREE.PointsMaterial({color:0x91ad52,size:.055,transparent:true,opacity:.38,depthWrite:false}));pts.userData.vapor=true;scene.add(pts);
+}
+function mushroom(x,z,h=2.2){
+ const stemMat=new THREE.MeshStandardMaterial({color:0x6d8272,roughness:.88});const capMat=new THREE.MeshStandardMaterial({color:0x3b8174,emissive:0x1f7a68,emissiveIntensity:.72,roughness:.55});
+ const stem=new THREE.Mesh(new THREE.CylinderGeometry(.13,.24,h,8),stemMat);stem.position.set(x,h/2,z);scene.add(stem);
+ const cap=new THREE.Mesh(new THREE.SphereGeometry(.72,12,7,0,Math.PI*2,0,Math.PI*.55),capMat);cap.scale.y=.55;cap.position.set(x,h,z);scene.add(cap);
+}
+function buildSectorC(s){
+ floorRect(-14,14,-96,-88);floorRect(-14,14,-124,-116);floorRect(-14,-6,-116,-96);floorRect(6,14,-116,-96);floorRect(-2,2,-116,-96);
+ floorRect(-6,6,-104,-100);floorRect(-6,6,-112,-108);
+ for(const r of[[-6,-2],[2,6]]){floorRect(r[0],r[1],-116,-96,-1.85,concreteMat);addWater(r[0]+.04,r[1]-.04,-115.96,-96.04,-1.85,-.4,'safe',2)}
+ // Dos cuartos laterales con vanos reales; el de setas es una excepción localizada.
+ wallZ(-100,-14,-11.25,0,4.6);wallZ(-100,-8.75,-6,0,4.6);addBox(-10,4.25,-100,2.5,.7,.34,tileMat,true);
+ wallZ(-112,6,8.8,0,4.6);wallZ(-112,11.2,14,0,4.6);addBox(10,4.25,-112,2.4,.7,.34,tileMat,true);
+ addBox(-10,.025,-104,5.4,.05,5.4,new THREE.MeshStandardMaterial({color:0x314c38,roughness:1}),false);
+ mushroom(-12.4,-102.2,2.5);mushroom(-8.1,-106.3,1.8);mushroom(-11.7,-107,1.35);
+ addBox(-13.72,1.8,-104,.18,3.6,5.2,new THREE.MeshStandardMaterial({color:0x7b8273,roughness:.85}),false);
+ buildValve(2,'C1',-13.72,1.25,-93,Math.PI/2);buildValve(2,'C2',13.72,1.25,-95,-Math.PI/2);buildValve(2,'C3',-13.55,1.25,-105,Math.PI/2);buildValve(2,'C4',13.72,1.25,-108,-Math.PI/2);buildValve(2,'C5',-13.72,1.25,-119,Math.PI/2);buildValve(2,'C6',13.72,1.25,-120,-Math.PI/2);buildValve(2,'C7',0,1.25,-113.5,0,true);
+ for(const x of[-12.8,12.8]){pipe(x,3.9,-90,x,3.9,-122,.12);for(const z of[-97,-110,-121])pipe(x,0,z,x,3.9,z,.075)}
+ addLightFixture(0,5.35,-91,0x718f87);addSign('CÁMARA C','7 VÁLVULAS · COLECTOR FINAL',0,3.7,-88.22,Math.PI,4.2);
+}
+function buildExit(){
+ wallX(-7,-146,-134,-2.2,7.7);wallX(7,-146,-134,-2.2,7.7);wallDoorZ(-134,-7,7);wallZ(-146,-7,7,0,5.5);floorRect(-7,7,-146,-134);addBox(0,5.65,-140,14,.3,12,concreteMat,true);
+ addLightFixture(0,5.35,-137,0x8fb5a5);addSign('TOBOGÁN DE RETORNO','SALIDA · UNA SOLA VÍA',0,3.6,-145.78,0,4.3);
+ const rim=new THREE.Mesh(new THREE.TorusGeometry(1.2,.18,10,28),new THREE.MeshStandardMaterial({color:0x9b873f,roughness:.38,metalness:.35}));rim.position.set(0,1.25,-142.5);scene.add(rim);
+ const mouth=new THREE.Mesh(new THREE.CircleGeometry(1.17,28),new THREE.MeshBasicMaterial({color:0x010708,side:THREE.DoubleSide}));mouth.position.set(0,1.25,-142.52);scene.add(mouth);
+ for(const x of[-1.45,1.45])pipe(x,0,-139,x,2.6,-139,.055);pipe(-1.45,2.6,-139,1.45,2.6,-139,.055);
+}
+function buildFlashlightModel(){const g=new THREE.Group(),mat=new THREE.MeshStandardMaterial({color:0x263233,roughness:.32,metalness:.8});const body=new THREE.Mesh(new THREE.CylinderGeometry(.045,.055,.28,10),mat);body.rotation.x=Math.PI/2;g.add(body);const lens=new THREE.Mesh(new THREE.CircleGeometry(.043,12),new THREE.MeshBasicMaterial({color:0xe8e0b5,toneMapped:false}));lens.position.z=-.145;lens.rotation.y=Math.PI;g.add(lens);g.position.set(.29,-.25,-.48);g.rotation.z=-.12;camera.add(g);flashModel=g;g.visible=false}
+function limbBetween(a,b,r,mat){const dir=b.clone().sub(a),len=dir.length(),m=new THREE.Mesh(new THREE.CylinderGeometry(r*.78,r,len,7),mat);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.normalize());return m}
+function buildClump(){
+ const g=new THREE.Group(),flesh=new THREE.MeshStandardMaterial({color:0x6f201d,roughness:.82}),dark=new THREE.MeshBasicMaterial({color:0x050101}),teeth=new THREE.MeshStandardMaterial({color:0xd9d2b4,roughness:.6});
+ for(let i=0;i<4;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(.48,11,8),flesh);b.scale.set(1.15,.9,1);b.position.set((i%2-.5)*.38,.85+Math.floor(i/2)*.32,(i%2-.5)*-.18);g.add(b)}
+ const mouth=new THREE.Mesh(new THREE.CircleGeometry(.33,20),dark);mouth.position.set(0,1.08,.52);g.add(mouth);const lip=new THREE.Mesh(new THREE.TorusGeometry(.34,.07,8,20),flesh);lip.position.copy(mouth.position);g.add(lip);
+ for(let i=0;i<12;i++){const a=i/12*Math.PI*2,t=new THREE.Mesh(new THREE.ConeGeometry(.035,.13,5),teeth);t.position.set(Math.cos(a)*.275,1.08+Math.sin(a)*.275,.555);t.rotation.z=a+Math.PI/2;g.add(t)}
+ enemyArms=[];for(let i=0;i<9;i++){const a=i/9*Math.PI*2,arm=new THREE.Group(),p0=new THREE.Vector3(Math.cos(a)*.28,.88,Math.sin(a)*.28),p1=new THREE.Vector3(Math.cos(a)*.82,.48+(.18*(i%2)),Math.sin(a)*.82),p2=new THREE.Vector3(Math.cos(a)*1.12,.08,Math.sin(a)*1.12);arm.add(limbBetween(p0,p1,.105,flesh),limbBetween(p1,p2,.085,flesh));const hand=new THREE.Mesh(new THREE.SphereGeometry(.13,8,6),flesh);hand.position.copy(p2);arm.add(hand);for(let f=-1;f<=1;f++){const tip=p2.clone().add(new THREE.Vector3(Math.cos(a+f*.35)*.25,-.03,Math.sin(a+f*.35)*.25));arm.add(limbBetween(p2,tip,.025,flesh))}g.add(arm);enemyArms.push(arm)}
+ g.visible=false;scene.add(g);enemyModel=g;
+ enemy=SECTORS.map((s,i)=>({x:s.enemy.x,z:s.enemy.z,feet:0,yaw:0,sector:i,path:[],pathI:0,target:null}));
+}
+function initSplash(){const n=56,pos=new Float32Array(n*3);pos.fill(-999);splashGeo=new THREE.BufferGeometry();splashGeo.setAttribute('position',new THREE.BufferAttribute(pos,3));splashPoints=new THREE.Points(splashGeo,new THREE.PointsMaterial({color:0x83c5bd,size:.065,transparent:true,opacity:.7,depthWrite:false}));scene.add(splashPoints);splashData=Array.from({length:n},()=>({life:0,vx:0,vy:0,vz:0}))}
+function spawnSplash(x,y,z,n=14){if(!splashGeo)return;const a=splashGeo.attributes.position;let made=0;for(let i=0;i<splashData.length&&made<n;i++){const p=splashData[i];if(p.life>0)continue;p.life=.45+Math.random()*.35;p.vx=(Math.random()-.5)*1.4;p.vz=(Math.random()-.5)*1.4;p.vy=.8+Math.random()*1.5;a.setXYZ(i,x+(Math.random()-.5)*.35,y+.03,z+(Math.random()-.5)*.35);made++}a.needsUpdate=true}
+function buildWorld(){
+ SECTORS.forEach((s,i)=>{shell(s,i>0);if(i===0)buildSectorA(s);else if(i===1)buildSectorB(s);else buildSectorC(s);buildTank(s,i);buildGate(s,i);buildConnector(s,i)});buildExit();
+ // Marcas de profundidad y canalizaciones continuas refuerzan la lectura arquitectónica.
+ for(const s of SECTORS){for(const x of[s.minX+.45,s.maxX-.45])pipe(x,.35,s.maxZ-1,x,.35,s.minZ+1,.045)}
+ flushBatches();buildFlashlightModel();buildClump();initSplash();
+}
+
+/* ---------- Audio WebAudio sintetizado ---------- */
+class SewerAudio{
+ init(){if(this.ctx){try{this.ctx.resume()}catch(_){}return}try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;this.ctx=new AC();this.master=this.ctx.createGain();this.master.gain.value=.72;this.master.connect(this.ctx.destination);const len=this.ctx.sampleRate*2;this.noiseBuf=this.ctx.createBuffer(1,len,this.ctx.sampleRate);const d=this.noiseBuf.getChannelData(0);let last=0;for(let i=0;i<len;i++){last=last*.985+(Math.random()*2-1)*.015;d[i]=last*3.2}const src=this.ctx.createBufferSource();src.buffer=this.noiseBuf;src.loop=true;this.filter=this.ctx.createBiquadFilter();this.filter.type='lowpass';this.filter.frequency.value=540;this.amb=this.ctx.createGain();this.amb.gain.value=.21;src.connect(this.filter);this.filter.connect(this.amb);this.amb.connect(this.master);src.start();this.drone=this.ctx.createOscillator();this.drone.type='sine';this.drone.frequency.value=43;this.droneGain=this.ctx.createGain();this.droneGain.gain.value=.055;this.drone.connect(this.droneGain);this.droneGain.connect(this.master);this.drone.start();this.threatOsc=this.ctx.createOscillator();this.threatOsc.type='sawtooth';this.threatOsc.frequency.value=54;this.threatGain=this.ctx.createGain();this.threatGain.gain.value=.0001;this.threatOsc.connect(this.threatGain);this.threatGain.connect(this.master);this.threatOsc.start()}catch(_){this.ctx=null}}
+ tone(type,f0,f1,dur,vol,delay=0){if(!this.ctx)return;try{const t=this.ctx.currentTime+delay,o=this.ctx.createOscillator(),g=this.ctx.createGain();o.type=type;o.frequency.setValueAtTime(f0,t);o.frequency.exponentialRampToValueAtTime(Math.max(1,f1),t+dur);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.025);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(this.master);o.start(t);o.stop(t+dur+.03)}catch(_){}}
+ noise(dur,cut,vol){if(!this.ctx||!this.noiseBuf)return;try{const t=this.ctx.currentTime,s=this.ctx.createBufferSource(),f=this.ctx.createBiquadFilter(),g=this.ctx.createGain();s.buffer=this.noiseBuf;f.type='lowpass';f.frequency.value=cut;g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.0001,t+dur);s.connect(f);f.connect(g);g.connect(this.master);s.start(t,Math.random());s.stop(t+dur)}catch(_){}}
+ valve(){for(let i=0;i<7;i++)this.tone('square',280+i*37,180,.055,.075,i*.15)}
+ valveDone(){this.tone('sine',420,690,.18,.16);this.tone('sine',690,920,.24,.1,.12)}
+ splash(){this.noise(.48,1050,.32);this.tone('sine',170,70,.3,.08)}
+ step(wet=false){this.noise(.07,wet?700:260,wet?.07:.035)}
+ gate(){this.noise(1.8,360,.24);this.tone('sawtooth',90,36,1.5,.12)}
+ death(){this.noise(1.1,900,.4);this.tone('sawtooth',120,28,1.25,.22)}
+ win(){[330,440,554,660].forEach((f,i)=>this.tone('triangle',f,f*1.02,.55,.12,i*.14))}
+ threat(v){if(!this.ctx||!this.threatGain)return;try{this.threatGain.gain.setTargetAtTime(.0001+v*.12,this.ctx.currentTime,.15);this.threatOsc.frequency.setTargetAtTime(48+v*28,this.ctx.currentTime,.2)}catch(_){}}
+ underwater(on){if(!this.ctx)return;try{this.filter.frequency.setTargetAtTime(on?180:540,this.ctx.currentTime,.12);this.amb.gain.setTargetAtTime(on?.32:.21,this.ctx.currentTime,.15)}catch(_){}}
+ duck(on){if(!this.ctx)return;try{this.master.gain.setTargetAtTime(on?.12:.72,this.ctx.currentTime,.15)}catch(_){}}
+}
+audio=new SewerAudio();
+
+/* ---------- Agua, movimiento, natación y contacto ---------- */
+let sprintBlocked=false,stepAccum=0,underwaterNow=false;
+function getWaterAt(x,z,feet){let best=null;for(const w of waters){if(x<w.x0||x>w.x1||z<w.z0||z>w.z1||feet>w.level+.12||feet<w.floor-.55)continue;const depth=w.level-feet;if(!best||depth>best.depth)best={w,depth}}return best}
+function isSafeInDeepWater(){const c=getWaterAt(player.x,player.z,player.feet);return!!(c&&c.w.type==='safe'&&c.depth>1.02)}
+function isHeadUnderwater(){const c=getWaterAt(player.x,player.z,player.feet);return!!(c&&player.feet+EYE<c.w.level-.035)}
+function moveAxis(axis,delta){if(!delta)return;const n=Math.max(1,Math.ceil(Math.abs(delta)/.11)),step=delta/n;for(let i=0;i<n;i++){const nx=axis==='x'?player.x+step:player.x,nz=axis==='z'?player.z+step:player.z;if(!collisionAt(nx,nz,player.feet)){player.x=nx;player.z=nz}else break}}
+function updatePlayer(dt){
+ const locked=IS_TOUCH||NOFOCUS||document.pointerLockElement===canvas;let ix=0,iz=0;if(locked){if(keys.KeyW||keys.ArrowUp)iz-=1;if(keys.KeyS||keys.ArrowDown)iz+=1;if(keys.KeyA||keys.ArrowLeft)ix-=1;if(keys.KeyD||keys.ArrowRight)ix+=1;ix+=input.joyX;iz+=input.joyY}
+ let len=Math.hypot(ix,iz);if(len>1){ix/=len;iz/=len}if(activeValve){ix=0;iz=0;len=0}
+ const contact=getWaterAt(player.x,player.z,player.feet),swimming=!!(contact&&contact.depth>1.02),devFly=devMode&&devFlyOn;
+ let running=!devFly&&(keys.ShiftLeft||keys.ShiftRight||input.run)&&len>.05&&!swimming&&!activeValve;
+ if(stamina<=.02)sprintBlocked=true;else if(stamina>.24)sprintBlocked=false;if(sprintBlocked)running=false;
+ stamina=clamp(stamina+(running?-dt/4.2:dt/5.4),0,1);
+ let speed=devMode&&devFlyOn?7:(running?4.8:3.05);if(contact){speed*=contact.depth>1.02?.58:1-clamp(contact.depth,0,1)*.42;if(running)speed=Math.max(speed,2.15)}
+ const sy=Math.sin(player.yaw),cy=Math.cos(player.yaw),f=-iz,vx=(-sy*f+cy*ix)*speed,vz=(-cy*f-sy*ix)*speed,ox=player.x,oz=player.z;
+ moveAxis('x',vx*dt);moveAxis('z',vz*dt);player.spd=Math.hypot(player.x-ox,player.z-oz)/Math.max(dt,.0001);
+ const oldFeet=player.feet,oldHead=oldFeet+EYE;let newFeet=oldFeet;
+ if(devFly){let up=(keys.Space||input.up?1:0)-(keys.KeyC||input.down?1:0);newFeet=oldFeet+up*3.3*dt;player.vy=0;player.grounded=false}
+ else if(swimming){let up=(keys.Space||input.up?1:0)-(keys.KeyC||input.down?1:0);player.vy+=(up*1.75-player.vy)*Math.min(1,dt*7);newFeet=oldFeet+player.vy*dt;player.grounded=false}
+ else{if(input.jumpQueued&&(player.grounded||player.coyote>0)&&!activeValve){player.vy=5.35;player.grounded=false;player.coyote=0;audio.tone('triangle',120,90,.08,.025)}player.vy-=15.5*dt;newFeet=oldFeet+player.vy*dt}
+ input.jumpQueued=false;
+ const g=groundAt(player.x,player.z,Math.max(oldFeet,newFeet));if(newFeet<=g){newFeet=g;if(player.vy<0)player.vy=0;if(!devFly){player.grounded=true;player.coyote=.12}}else{if(player.grounded)player.coyote=.12;player.grounded=false;player.coyote=Math.max(0,player.coyote-dt)}
+ if(player.vy>0||devFly||(swimming&&newFeet>oldFeet)){const ceil=ceilingAt(player.x,player.z,oldHead,newFeet+EYE);if(ceil<Infinity){newFeet=Math.min(newFeet,ceil-EYE-.025);player.vy=Math.min(0,player.vy)}}
+ player.feet=newFeet;
+ if(player.feet<-3.7){die('CAÍDA FUERA DEL COLECTOR','El mantenimiento no registró este hueco.');return}
+ player.bob+=player.spd*dt*(swimming?1.2:2.2);const bob=Math.sin(player.bob*3)*.025*Math.min(player.spd/3,1);camera.position.set(player.x,player.feet+EYE+bob,player.z);camera.quaternion.setFromEuler(new THREE.Euler(player.pitch,player.yaw,0,'YXZ'));
+ stepAccum+=player.spd*dt;if(stepAccum>(running?1.25:1.05)&&player.grounded){stepAccum=0;audio.step(!!contact)}
+}
+function updateWaterState(dt){
+ const c=getWaterAt(player.x,player.z,player.feet);waterContact=c;const wet=!!(c&&c.depth>.12);if(wet&&!wasWet){audio.splash();spawnSplash(player.x,c.w.level,player.z)}wasWet=wet;
+ const under=isHeadUnderwater();if(under!==underwaterNow){underwaterNow=under;audio.underwater(under)}
+ oxygen=clamp(oxygen+(under?-dt/11:dt/2.8),0,1);if(oxygen<=0){die('ASFIXIA EN EL SIFÓN','Debes subir a respirar antes de cruzar el tramo bajo el techo.');return}
+ const toxic=!!(c&&c.w.type==='toxic'&&c.depth>.12);infection=clamp(infection+(toxic?dt/3.1:-dt/4.5),0,1);if(infection>=1){die('INFECCIÓN POR HYDROLITIS','El agua verde no es una ruta: sal de ella antes de que la infección llegue al máximo.');return}
+ $('underwater').style.opacity=under?'1':'0';$('damage').style.opacity=String(infection*.82);$('infectionRow').classList.toggle('hidden',infection<.015);
+ let txt='';if(c){if(c.w.type==='toxic')txt='AGUA INFECTADA · SAL DE LA CUENCA';else if(isSafeInDeepWater())txt='AGUA PROFUNDA · RASTRO OCULTO';else if(c.depth>1.02)txt=under?'SUMERGIDO · ESPACIO ⤒ PARA SUBIR':'NADANDO · C / ↓ PARA BAJAR';else txt='VADEO · EL AGUA FRENA EL PASO'}$('waterState').textContent=txt;$('waterState').classList.toggle('hidden',!txt);
+ $('jumpLabel').textContent=c&&c.depth>1.02?'SUBIR':'SALTAR';$('btnDown').classList.toggle('hidden',!(c&&c.depth>1.02));
+}
+
+/* ---------- Válvulas persistentes, tanques y compuertas ---------- */
+function valveCount(si){let n=0;for(const v of valves)if(v.sector===si&&v.on)n++;return n}
+function updateTankSign(si){const s=SECTORS[si],t=tanks[si];if(!t||!t.sign)return;const old=t.sign.material.map;t.sign.material.map=signTexture('TANQUE '+s.id,valveCount(si)+' / '+s.need+(rtOpen(si)?' · EQUALIZADO':' · COMPENSACIÓN'));t.sign.material.needsUpdate=true;if(old)old.dispose()}
+function rtOpen(si){return sectorRuntime[si].open}
+function nearestInteraction(){let best=null,bd=2.2;for(const v of valves){if(v.on)continue;const d=Math.hypot(player.x-v.pos.x,player.z-v.pos.z);if(d<bd&&Math.abs(player.feet+1.05-v.pos.y)<1.75){best={type:'valve',v};bd=d}}const sd=Math.hypot(player.x,player.z+139.5);if(sd<2.25&&sectorRuntime[2].open&&sd<bd)best={type:'slide'};return best}
+function tryInteract(){if(state!=='play'||activeValve)return;const a=nearestInteraction();if(!a)return;if(a.type==='slide'){beginSlide();return}activeValve={v:a.v,t:0};audio.valve();toast('GIRANDO '+a.v.id+' · NO TE ALEJES',1500)}
+function updateInteraction(dt){
+ if(activeValve){const a=activeValve,v=a.v;if(Math.hypot(player.x-v.pos.x,player.z-v.pos.z)>2.7){v.wheel.rotation.z=0;activeValve=null;toast('VÁLVULA INTERRUMPIDA')}else{a.t+=dt;v.wheel.rotation.z=-Math.PI*2*clamp(a.t/1.25,0,1);if(a.t>=1.25){v.on=true;v.wheel.rotation.z=-Math.PI*1.75;v.lamp.material.color.set(0x71d59b);activeValve=null;audio.valveDone();const si=v.sector,n=valveCount(si),s=SECTORS[si],rt=sectorRuntime[si];updateTankSign(si);toast(n===s.need?'TANQUE '+s.id+' LLENO · EQUALIZANDO SIFÓN':'VÁLVULA '+v.id+' FIJADA · '+n+'/'+s.need,2800);if(n===s.need&&!rt.open&&!rt.equalizing){rt.equalizing=true;rt.equalT=0;s.connectorWater.target=.65}showObjective(n===s.need?'ESPERA LA EQUALIZACIÓN':'SIGUE BUSCANDO VÁLVULAS',n===s.need?'La compuerta se abrirá cuando termine la subida de agua.':'El tanque marca '+n+' de '+s.need+'.')}}}
+ const a=nearestInteraction();promptAction=a;let txt='';if(activeValve)txt='GIRANDO '+activeValve.v.id+'…';else if(a){if(a.type==='valve')txt=(IS_TOUCH?'USAR':'E')+' — GIRAR VÁLVULA '+a.v.id;else txt=(IS_TOUCH?'USAR':'E')+' — ENTRAR AL TOBOGÁN'}$('prompt').textContent=txt;$('prompt').classList.toggle('hidden',!txt);$('btnUse').classList.toggle('hidden',!a||!!activeValve);
+}
+function updateSectors(dt){
+ for(let i=0;i<SECTORS.length;i++){const s=SECTORS[i],rt=sectorRuntime[i],target=valveCount(i)/s.need;rt.fill+=(target-rt.fill)*Math.min(1,dt*2.8);const t=tanks[i],h=.05+rt.fill*2.25;t.water.scale.y=h;t.water.position.y=.17+h/2;t.lamp.material.color.set(rt.open?0x72d89c:target>=1?0xd9b85e:0xe05a45);
+  if(rt.equalizing){rt.equalT+=dt;const k=clamp(rt.equalT/3.2,0,1);s.connectorWater.level=-1.25+1.9*k;s.connectorWater.mesh.position.y=s.connectorWater.level;if(k>=1){rt.equalizing=false;rt.open=true;audio.gate();toast('SIFÓN '+s.id+' EQUALIZADO · COMPUERTA ABRIENDO',3600);updateTankSign(i);if(s.connectorSign){const old=s.connectorSign.material.map;s.connectorSign.material.map=signTexture('SIFÓN '+s.id,'EQUALIZADO · COMPUERTA ABIERTA');s.connectorSign.material.needsUpdate=true;if(old)old.dispose()}showObjective('SIFÓN ABIERTO','Cruza el tramo sumergido. Busca aire antes de seguir.')}}
+  const g=gates[i];if(rt.open){g.lift=Math.min(3.8,g.lift+dt*1.55);g.group.position.y=g.lift;if(g.lift>2.45)g.collider.active=false}
+ }
+ for(const w of waters){w.mesh.material.uniforms.uTime.value=time;if(!w.connector){w.level+=(w.target-w.level)*Math.min(1,dt*3);w.mesh.position.y=w.level}}
+}
+function beginSlide(){if(state!=='play')return;state='slide';slideT=0;activeValve=null;clearInputs();$('prompt').classList.add('hidden');$('touchUI').classList.add('hidden');audio.tone('sine',280,70,1.8,.14);if(document.pointerLockElement)document.exitPointerLock()}
+function updateSlide(dt){slideT+=dt;player.z-=dt*(2.4+slideT*2.1);player.feet-=dt*Math.max(0,slideT-.55)*.75;camera.position.set(player.x,player.feet+EYE,player.z);camera.rotation.x=-.18-slideT*.08;if(slideT>.8)$('fade').classList.add('on');if(slideT>2.25)completeLevel()}
+function completeLevel(){if(state==='win')return;markComplete(LEVEL_ID,playTime);state='win';audio.win();audio.threat(0);enemyModel.visible=false;$('fade').classList.remove('on');$('hud').classList.add('hidden');$('meters').classList.add('hidden');$('inventory').classList.add('hidden');$('pauseBtn').classList.add('hidden');$('winStats').textContent=(devMode?'◆ SOLO DEV · ':'')+(valveCount(0)+valveCount(1)+valveCount(2))+'/14 VÁLVULAS · '+fmt(playTime)+' · '+deathCount+(deathCount===1?' MUERTE':' MUERTES');$('winText').textContent=devMode?'Victoria registrada únicamente en levelsCompletedDev. El progreso normal no ha cambiado.':'Victoria normal guardada en BACKROOMS_SAVE_V1. El tobogán devuelve la cinta al nexo.';$('returnOrigin').textContent=ORIGIN==='poolrooms'?'VOLVER A POOLROOMS':'VOLVER A THE HUB';$('win').classList.remove('hidden');refreshStats()}
+
+/* ---------- Clump: percepción, rutas por rejilla y agua profunda segura ---------- */
+const navs=[],PATROLS=[
+ [[-9,-8],[9,-8],[9,-26],[0,-24],[-9,-26]],
+ [[-10,-48],[10,-48],[10,-72],[-10,-72]],
+ [[-10,-93],[10,-95],[10,-119],[0,-114],[-10,-119],[-10,-105]]
+];
+function navWalkable(x,z,feet=.4){const g=groundAt(x,z,feet);if(g<-.65)return false;return!collisionAt(x,z,g,.37)}
+function buildNav(si){const s=SECTORS[si],nx=Math.floor(s.maxX-s.minX),nz=Math.floor(s.maxZ-s.minZ),walk=new Uint8Array(nx*nz);for(let j=0;j<nz;j++)for(let i=0;i<nx;i++){const x=s.minX+i+.5,z=s.minZ+j+.5;walk[j*nx+i]=navWalkable(x,z)?1:0}navs[si]={nx,nz,walk,minX:s.minX,minZ:s.minZ}}
+function nearestNavNode(n,x,z){let best=-1,bd=Infinity;for(let j=0;j<n.nz;j++)for(let i=0;i<n.nx;i++){const k=j*n.nx+i;if(!n.walk[k])continue;const dx=n.minX+i+.5-x,dz=n.minZ+j+.5-z,d=dx*dx+dz*dz;if(d<bd){bd=d;best=k}}return best}
+function findPath(si,sx,sz,tx,tz){const n=navs[si];if(!n)return[];const start=nearestNavNode(n,sx,sz),goal=nearestNavNode(n,tx,tz);if(start<0||goal<0)return[];if(start===goal)return[{x:tx,z:tz}];const total=n.nx*n.nz,g=new Float32Array(total),f=new Float32Array(total),came=new Int32Array(total),closed=new Uint8Array(total);g.fill(Infinity);f.fill(Infinity);came.fill(-1);const open=[start];g[start]=0;f[start]=0;let iterations=0;
+ while(open.length&&iterations++<1600){let bi=0;for(let i=1;i<open.length;i++)if(f[open[i]]<f[open[bi]])bi=i;const cur=open.splice(bi,1)[0];if(cur===goal){const rev=[];let c=cur;while(c!==start&&c>=0){rev.push({x:n.minX+(c%n.nx)+.5,z:n.minZ+Math.floor(c/n.nx)+.5});c=came[c]}rev.reverse();rev.push({x:tx,z:tz});return rev}closed[cur]=1;const cx=cur%n.nx,cz=Math.floor(cur/n.nx);for(const d of[[1,0],[-1,0],[0,1],[0,-1]]){const x=cx+d[0],z=cz+d[1];if(x<0||z<0||x>=n.nx||z>=n.nz)continue;const k=z*n.nx+x;if(!n.walk[k]||closed[k])continue;const ng=g[cur]+1;if(ng>=g[k])continue;came[k]=cur;g[k]=ng;const hx=x-(goal%n.nx),hz=z-Math.floor(goal/n.nx);f[k]=ng+Math.abs(hx)+Math.abs(hz);if(!open.includes(k))open.push(k)}}return[]}
+function exactSectorAt(x,z){for(let i=0;i<SECTORS.length;i++){const s=SECTORS[i];if(x>s.minX&&x<s.maxX&&z>s.minZ&&z<s.maxZ)return i}return-1}
+function sectorForPosition(z){if(z>-44)return 0;if(z>-88)return 1;return 2}
+function setEnemyPath(e,x,z){e.path=findPath(currentSector,e.x,e.z,x,z);e.pathI=0}
+function resetEnemy(si){const s=SECTORS[si],e=enemy[si];e.x=s.enemy.x;e.z=s.enemy.z;e.feet=0;e.path=[];e.pathI=0;e.patrolI=0;enemyMode='patrol';enemySeen=0;enemyRepath=0;enemyDelay=devMode?2:6;enemyModel.visible=false}
+function enterSector(si,initial=false){currentSector=si;const s=SECTORS[si];if(!s.visited){s.visited=true;resetEnemy(si);if(!initial)showObjective(s.name,s.need+' válvulas alimentan el tanque. El agua profunda rompe la persecución.')}else{enemyDelay=2;enemyMode='patrol'}updateTankSign(si)}
+function updateEnemy(dt){
+ if(!enemyEnabled){enemyModel.visible=false;audio.threat(0);return}
+ const si=exactSectorAt(player.x,player.z);if(si<0){enemyModel.visible=false;audio.threat(0);return}const e=enemy[si];enemyDelay=Math.max(0,enemyDelay-dt);if(enemyDelay>0){enemyModel.visible=false;audio.threat(0);return}enemyModel.visible=true;
+ const dx=player.x-e.x,dz=player.z-e.z,dist=Math.hypot(dx,dz),safe=isSafeInDeepWater(),range=flashlight?15:10;
+ const sees=!safe&&dist<range&&!lineBlocked(e.x,e.z,player.x,player.z);
+ if(sees){if(enemyMode!=='chase'){enemyMode='chase';audio.tone('sawtooth',95,48,.55,.12);toast('EL CLUMP TE HA VISTO · BUSCA AGUA PROFUNDA',2200)}enemySeen=2.4}else enemySeen=Math.max(0,enemySeen-dt);
+ if(enemyMode==='chase'&&enemySeen<=0){enemyMode='patrol';e.path=[];enemyRepath=0}
+ enemyRepath-=dt;if(enemyRepath<=0){enemyRepath=enemyMode==='chase'?.55:1.2;if(enemyMode==='chase'&&!safe){if(dist<4.5&&!lineBlocked(e.x,e.z,player.x,player.z)){e.path=[{x:player.x,z:player.z}];e.pathI=0}else setEnemyPath(e,player.x,player.z)}else if(!e.path.length||e.pathI>=e.path.length){const p=PATROLS[si][e.patrolI++%PATROLS[si].length];setEnemyPath(e,p[0],p[1])}}
+ let target=e.path[e.pathI];if(target){let tx=target.x-e.x,tz=target.z-e.z,td=Math.hypot(tx,tz);if(td<.38){e.pathI++;target=e.path[e.pathI]}if(target){tx=target.x-e.x;tz=target.z-e.z;td=Math.hypot(tx,tz);const sp=enemyMode==='chase'?3.35:1.12,nx=e.x+tx/Math.max(td,.001)*sp*dt,nz=e.z+tz/Math.max(td,.001)*sp*dt,g=groundAt(nx,nz,e.feet+.3);if(g>-.65&&!collisionAt(nx,nz,g,.36)){e.x=nx;e.z=nz;e.feet+=(g-e.feet)*Math.min(1,dt*9);e.yaw=Math.atan2(tx,tz)}else{e.path=[];enemyRepath=0}}}
+ const nd=Math.hypot(player.x-e.x,player.z-e.z);if(nd<.86&&Math.abs(player.feet-e.feet)<1.5&&!safe){die('EL CLUMP TE ENCONTRÓ','Correr abre distancia; sumergirte en una piscina profunda rompe su rastro.');return}
+ enemyModel.position.set(e.x,e.feet,e.z);enemyModel.rotation.y=e.yaw;for(let i=0;i<enemyArms.length;i++)enemyArms[i].rotation.y=Math.sin(time*(enemyMode==='chase'?7:2.5)+i)*.045;
+ audio.threat(enemyMode==='chase'?clamp(1-nd/18,.15,1):clamp(1-nd/10,0,.25));
+}
+
+/* ---------- Muerte, reintento y conservación de válvulas ---------- */
+function respawn(){const s=SECTORS[currentSector];player.x=s.start.x;player.z=s.start.z;player.feet=0;player.vy=0;player.yaw=s.start.yaw;player.pitch=0;player.grounded=true;infection=0;oxygen=1;stamina=1;waterContact=null;wasWet=false;underwaterNow=false;if(activeValve){activeValve.v.wheel.rotation.z=0;activeValve=null}resetEnemy(currentSector);clearInputs();camera.position.set(player.x,EYE,player.z)}
+function die(reason,detail){if(state!=='play')return;if(devMode){infection=0;oxygen=1;toast('DEV: daño letal ignorado');respawn();return}state='death';deathCount++;recordDeath();activeValve=null;clearInputs();audio.death();audio.threat(0);enemyModel.visible=false;$('deathReason').textContent=reason;$('deathDetail').textContent=detail+' Las válvulas completadas se conservan.';$('death').classList.remove('hidden');$('touchUI').classList.add('hidden');$('pauseBtn').classList.add('hidden');if(document.pointerLockElement)document.exitPointerLock();refreshStats()}
+function retry(){if(state!=='death')return;$('death').classList.add('hidden');state='play';respawn();$('pauseBtn').classList.remove('hidden');if(IS_TOUCH)$('touchUI').classList.remove('hidden');else lockPointer();audio.duck(false)}
+
+/* ---------- UI, entrada de escritorio y controles táctiles ---------- */
+let devFlyOn=false,joyId=-1,lookId=-1,joyOX=0,joyOY=0,lookX=0,lookY=0;
+function toast(msg,ms=2600){$('toast').textContent=msg;$('toast').classList.remove('hidden');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.add('hidden'),ms)}
+function showObjective(title,sub=''){clearTimeout(objectiveTimer);$('objective').innerHTML='<b>'+title+'</b>'+(sub?'<br>'+sub:'');$('objective').classList.remove('hidden');$('objective').style.opacity='1';objectiveTimer=setTimeout(()=>{$('objective').style.opacity='0';setTimeout(()=>$('objective').classList.add('hidden'),550)},5600)}
+function fmtOrigin(){return ORIGIN==='poolrooms'?'POOLROOMS':'THE HUB'}
+function refreshStats(){let html='';for(const[id,label]of LEVELS){const normal=completed(id),dev=!normal&&completedDev(id),best=save.bestTime[id];html+='<tr class="'+(normal?'done':dev?'devonly':'pending')+'"><td>'+label+'</td><td>'+(normal?'✔ PASADO':dev?'◆ SOLO DEV':'PENDIENTE')+'</td><td>'+(typeof best==='number'?fmt(best):'—')+'</td></tr>'}$('statsRows').innerHTML=html;$('statsMeta').textContent='INTENTOS '+(save.totalAttempts||0)+' · MUERTES '+(save.totalDeaths||0)+' · VICTORIAS '+(save.totalWins||0)}
+function updateHUD(dt){hudAccum+=dt;if(hudAccum<.09)return;hudAccum=0;const s=SECTORS[currentSector];$('sectorName').textContent=s.name;$('valveHud').textContent='VÁLVULAS '+valveCount(currentSector)+'/'+s.need+(sectorRuntime[currentSector].open?' · SIFÓN ABIERTO':'');$('clock').textContent=fmt(playTime);$('oxygenBar').style.transform='scaleX('+oxygen.toFixed(3)+')';$('staminaBar').style.transform='scaleX('+stamina.toFixed(3)+')';$('infectionBar').style.transform='scaleX('+infection.toFixed(3)+')'}
+function setFlashlight(on){flashlight=!!on;if(flashSpot){flashSpot.visible=flashlight;flashNear.visible=flashlight;flashModel.visible=flashlight}$('lightState').textContent=(flashlight?'LINTERNA ENCENDIDA · ':'LINTERNA APAGADA · ')+(IS_TOUCH?'LUZ':'F');$('lightState').classList.toggle('on',flashlight);$('btnLight').classList.toggle('on',flashlight)}
+function clearInputs(){for(const k in keys)keys[k]=false;input.joyX=input.joyY=0;input.run=input.up=input.down=false;input.jumpQueued=false;joyId=lookId=-1;$('stick').style.display='none';document.querySelectorAll('.tbtn.on').forEach(b=>{if(b.id!=='btnLight')b.classList.remove('on')})}
+function lockPointer(){if(IS_TOUCH||NOFOCUS||state!=='play')return;try{const p=canvas.requestPointerLock();if(p&&p.catch)p.catch(()=>{})}catch(_){}}
+function pauseGame(){if(state!=='play')return;state='pause';clearInputs();audio.duck(true);$('pauseInfo').textContent=SECTORS[currentSector].short+' · '+fmt(playTime);$('pause').classList.remove('hidden');$('touchUI').classList.add('hidden');$('pauseBtn').classList.add('hidden');if(document.pointerLockElement)document.exitPointerLock()}
+function resumeGame(){if(state!=='pause')return;state='play';$('pause').classList.add('hidden');$('qualityPanel').classList.add('hidden');audio.duck(false);$('pauseBtn').classList.remove('hidden');if(IS_TOUCH)$('touchUI').classList.remove('hidden');else lockPointer();clock.getDelta()}
+function startGame(record=true){if(started)return;started=true;state='play';if(record)recordAttempt();audio.init();setFlashlight(false);$('start').classList.add('hidden');$('hud').classList.remove('hidden');$('meters').classList.remove('hidden');$('inventory').classList.remove('hidden');$('cross').classList.remove('hidden');$('pauseBtn').classList.remove('hidden');$('checkpoint').textContent='RETORNO: '+fmtOrigin();$('devHud').classList.toggle('hidden',!devMode);if(IS_TOUCH){$('touchUI').classList.remove('hidden')}else lockPointer();enterSector(0,true);showObjective('ABRE EL PRIMER SIFÓN',IS_TOUCH?'Busca 4 válvulas. LUZ enciende la linterna; el agua profunda te oculta.':'Busca 4 válvulas. F enciende la linterna; el agua profunda te oculta.');refreshStats()}
+function startDev(){devMode=true;window.__BACKROOMS_DEV=true;$('devToggle').classList.remove('hidden');$('devPanel').classList.remove('hidden');startGame(false);devNotice()}
+function goLocal(file){const q=ORIGIN==='poolrooms'?'?from=37.2':'';navUrl=file+q;location.href=navUrl}
+function reloadLevel(){location.reload()}
+
+addEventListener('keydown',e=>{if(e.target&&['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;keys[e.code]=true;if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(e.repeat)return;if(e.code==='KeyE')tryInteract();if(e.code==='KeyF'&&state==='play')setFlashlight(!flashlight);if(e.code==='Space'&&state==='play')input.jumpQueued=true;if((e.code==='KeyP'||e.code==='Escape')&&state==='play')pauseGame();else if(e.code==='KeyP'&&state==='pause')resumeGame()});
+addEventListener('keyup',e=>{keys[e.code]=false});addEventListener('blur',clearInputs);document.addEventListener('visibilitychange',()=>{if(document.hidden){clearInputs();if(state==='play')pauseGame()}});
+document.addEventListener('mousemove',e=>{if(document.pointerLockElement===canvas&&state==='play'){player.yaw-=e.movementX*.00225;player.pitch=clamp(player.pitch-e.movementY*.00225,-1.47,1.47)}});
+document.addEventListener('pointerlockchange',()=>{if(!IS_TOUCH&&!NOFOCUS&&started&&state==='play'&&document.pointerLockElement!==canvas)pauseGame()});
+canvas.addEventListener('click',()=>{if(state==='play'&&!IS_TOUCH&&document.pointerLockElement!==canvas)lockPointer()});canvas.addEventListener('contextmenu',e=>e.preventDefault());
+canvas.addEventListener('touchstart',e=>{if(state!=='play')return;e.preventDefault();for(const t of e.changedTouches){if(t.clientX<innerWidth*.43&&joyId<0){joyId=t.identifier;joyOX=t.clientX;joyOY=t.clientY;$('stick').style.left=joyOX+'px';$('stick').style.top=joyOY+'px';$('stick').style.display='block'}else if(lookId<0){lookId=t.identifier;lookX=t.clientX;lookY=t.clientY}}},{passive:false});
+canvas.addEventListener('touchmove',e=>{if(state!=='play')return;e.preventDefault();for(const t of e.changedTouches){if(t.identifier===joyId){let dx=t.clientX-joyOX,dy=t.clientY-joyOY,m=Math.hypot(dx,dy);if(m>50){dx*=50/m;dy*=50/m}input.joyX=dx/50;input.joyY=dy/50;$('knob').style.transform='translate(calc(-50% + '+dx+'px),calc(-50% + '+dy+'px))'}else if(t.identifier===lookId){player.yaw-=(t.clientX-lookX)*.0045;player.pitch=clamp(player.pitch-(t.clientY-lookY)*.0045,-1.47,1.47);lookX=t.clientX;lookY=t.clientY}}},{passive:false});
+function touchEnd(e){for(const t of e.changedTouches){if(t.identifier===joyId){joyId=-1;input.joyX=input.joyY=0;$('stick').style.display='none';$('knob').style.transform='translate(-50%,-50%)'}if(t.identifier===lookId)lookId=-1}}
+canvas.addEventListener('touchend',touchEnd);canvas.addEventListener('touchcancel',touchEnd);
+function bindHold(el,on,off){const start=e=>{e.preventDefault();el.classList.add('on');on()},end=e=>{e.preventDefault();el.classList.remove('on');off()};el.addEventListener('touchstart',start,{passive:false});el.addEventListener('touchend',end,{passive:false});el.addEventListener('touchcancel',end,{passive:false});el.addEventListener('mousedown',start);el.addEventListener('mouseup',end);el.addEventListener('mouseleave',e=>{if(el.classList.contains('on'))end(e)})}
+bindHold($('btnRun'),()=>input.run=true,()=>input.run=false);bindHold($('btnJump'),()=>{input.up=true;input.jumpQueued=true},()=>input.up=false);bindHold($('btnDown'),()=>input.down=true,()=>input.down=false);
+$('btnUse').addEventListener('click',e=>{e.preventDefault();tryInteract()});$('btnLight').addEventListener('click',()=>setFlashlight(!flashlight));$('pauseBtn').addEventListener('click',pauseGame);$('resume').addEventListener('click',resumeGame);$('retry').addEventListener('click',retry);$('enter').addEventListener('click',()=>startGame(true));$('devStart').addEventListener('click',startDev);$('pauseMenu').addEventListener('click',reloadLevel);$('deathMenu').addEventListener('click',reloadLevel);$('replay').addEventListener('click',reloadLevel);$('returnOrigin').addEventListener('click',()=>goLocal(ORIGIN==='poolrooms'?'poolrooms.html':'the-hub.html'));$('returnHub').addEventListener('click',()=>{navUrl='the-hub.html';location.href=navUrl});
+$('pauseQuality').addEventListener('click',()=>$('qualityPanel').classList.toggle('hidden'));document.querySelectorAll('#qualityPanel [data-q]').forEach(b=>b.addEventListener('click',()=>{const q=+b.dataset.q;Q.pref=q;if(q>=0)applyTier(q);try{if(q>=0)localStorage.setItem('dark37.qpref',String(q));else localStorage.removeItem('dark37.qpref')}catch(_){}syncQuality()}));
+$('fsBtn').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen({navigationUI:'hide'});else await document.exitFullscreen()}catch(_){}setTimeout(resize,100)});
+const tabs=[...document.querySelectorAll('.tab')],panes=[...$('panes').children];tabs.forEach((t,i)=>t.addEventListener('click',()=>{tabs.forEach(x=>x.classList.remove('on'));panes.forEach(x=>x.classList.add('hidden'));t.classList.add('on');panes[i].classList.remove('hidden')}));
+$('devToggle').addEventListener('click',()=>$('devPanel').classList.toggle('hidden'));document.querySelectorAll('#devPanel [data-tp]').forEach(b=>b.addEventListener('click',()=>{const i=+b.dataset.tp;if(i<3){const s=SECTORS[i];player.x=s.start.x;player.z=s.start.z;player.feet=0;player.yaw=s.start.yaw;enterSector(i)}else{player.x=0;player.z=-137;player.feet=0;currentSector=2}player.vy=0;toast('DEV: TELETRANSPORTE')}));
+$('devSector').addEventListener('click',()=>{const si=currentSector,s=SECTORS[si],rt=sectorRuntime[si];for(const v of valves)if(v.sector===si&&!v.on){v.on=true;v.wheel.rotation.z=-Math.PI*1.75;v.lamp.material.color.set(0x71d59b)}if(!rt.open&&!rt.equalizing){rt.equalizing=true;rt.equalT=0;s.connectorWater.target=.65}updateTankSign(si);toast('DEV: SECTOR '+s.id+' COMPLETADO')});$('devFly').addEventListener('click',()=>{devFlyOn=!devFlyOn;$('devFly').textContent='VUELO: '+(devFlyOn?'ON':'OFF');$('devFly').classList.toggle('on',devFlyOn)});
+
+/* ---------- Efectos ligeros y bucle principal ---------- */
+function updateFX(dt){if(splashGeo&&splashPoints.visible){const a=splashGeo.attributes.position;for(let i=0;i<splashData.length;i++){const p=splashData[i];if(p.life<=0)continue;p.life-=dt;if(p.life<=0){a.setXYZ(i,-999,-999,-999);continue}p.vy-=4.5*dt;a.setXYZ(i,a.getX(i)+p.vx*dt,a.getY(i)+p.vy*dt,a.getZ(i)+p.vz*dt)}a.needsUpdate=true}for(const o of scene.children)if(o.userData.vapor)o.position.y=Math.sin(time*.55)*.08;if(flashlight)flashSpot.intensity=42+Math.sin(time*17)*.7}
+function animate(){requestAnimationFrame(animate);const dt=Math.min(clock.getDelta(),.05);if(state==='pause'||state==='death'||state==='win')return;
+ if(state==='menu'){time+=dt;updateSectors(dt);updateFX(dt);renderer.render(scene,camera);frames++;return}
+ if(state==='slide'){time+=dt;updateSlide(dt);updateSectors(dt);updateFX(dt);renderer.render(scene,camera);frames++;return}
+ if(state!=='play')return;time+=dt;playTime+=dt;updatePlayer(dt);if(state!=='play')return;
+ const ns=sectorForPosition(player.z);if(ns!==currentSector)enterSector(ns);updateWaterState(dt);if(state!=='play')return;updateInteraction(dt);updateSectors(dt);updateEnemy(dt);if(state!=='play')return;updateFX(dt);updateHUD(dt);qualityTick(dt);renderer.render(scene,camera);frames++}
+
+/* ---------- Inicialización y ganchos QA ---------- */
+function init(){initRenderer();initMaterials();buildWorld();for(let i=0;i<3;i++)buildNav(i);setFlashlight(false);player.x=0;player.z=-4;player.feet=0;camera.position.set(0,EYE,-4);camera.quaternion.setFromEuler(new THREE.Euler(0,0,0,'YXZ'));$('deskControls').classList.toggle('hidden',IS_TOUCH);$('touchControls').classList.toggle('hidden',!IS_TOUCH);refreshStats();syncQuality();$('enter').disabled=false;$('enter').textContent='ENTRAR AL DRENAJE';window.__DARK37.ready=true;animate()}
+window.__DARK37={ready:false,errors,THREE,get renderer(){return renderer},get scene(){return scene},get camera(){return camera},get player(){return player},get fps(){return fpsEMA},get frames(){return frames},
+ state(){return{ready:this.ready,state,started,devMode,origin:ORIGIN,sector:currentSector,playTime,deathCount,player:{x:player.x,z:player.z,feet:player.feet,yaw:player.yaw,pitch:player.pitch,grounded:player.grounded},activeValve:activeValve?activeValve.v.id:null,valves:SECTORS.map((s,i)=>({id:s.id,on:valveCount(i),need:s.need,fill:+sectorRuntime[i].fill.toFixed(3),equalizing:sectorRuntime[i].equalizing,open:sectorRuntime[i].open,water:+s.connectorWater.level.toFixed(3),gateLift:+gates[i].lift.toFixed(3),gateBlocked:gates[i].collider.active})),ids:valves.map(v=>({id:v.id,on:v.on,x:v.pos.x,y:v.pos.y,z:v.pos.z})),flashlight,infection,oxygen,stamina,water:waterContact?{type:waterContact.w.type,depth:waterContact.depth,connector:waterContact.w.connector}:null,safeDeep:isSafeInDeepWater(),underwater:isHeadUnderwater(),enemy:{mode:enemyMode,visible:enemyModel?enemyModel.visible:false,delay:enemyDelay,x:enemy?enemy.x:null,z:enemy?enemy.z:null},save:{completed:completed(LEVEL_ID),completedDev:completedDev(LEVEL_ID),attempts:save.attempts[LEVEL_ID]||0,deaths:save.deaths[LEVEL_ID]||0,bestTime:save.bestTime[LEVEL_ID]},quality:Q.tier,fps:fpsEMA,frames,drawCalls:renderer?renderer.info.render.calls:0,triangles:renderer?renderer.info.render.triangles:0,errors:[...errors],navUrl}},
+ start:()=>startGame(false),startDev,pause:pauseGame,resume:resumeGame,retry,tp(x,z,feet=0,yaw=player.yaw){player.x=x;player.z=z;player.feet=feet;player.vy=0;player.yaw=yaw;const ns=sectorForPosition(z);if(ns!==currentSector)enterSector(ns)},look(yaw,pitch=0){player.yaw=yaw;player.pitch=pitch},interact:tryInteract,setInput(x=0,z=0,run=false){input.joyX=x;input.joyY=z;input.run=run},jump(){input.jumpQueued=true},setKey(code,on){keys[code]=on},light:on=>setFlashlight(on),die:()=>die('PRUEBA DE DAÑO','Muerte provocada por QA.'),completeSector:()=>$('devSector').click(),completeLevel,resetSave(){save=defaultSave();persistSave();refreshStats()},save:()=>save,quality:applyTier,
+ path:(si,sx,sz,tx,tz)=>findPath(si,sx,sz,tx,tz),wakeEnemy(){enemyDelay=0},enemyTp(x,z){const e=enemy[currentSector];e.x=x;e.z=z;e.path=[];enemyRepath=0},setEnemyEnabled(on){enemyEnabled=!!on;if(!enemyEnabled)enemyModel.visible=false},
+ audioQA(){const out={ctx:audio.ctx?audio.ctx.state:null,master:audio.master?audio.master.gain.value:null,amb:audio.amb?audio.amb.gain.value:null,filter:audio.filter?audio.filter.frequency.value:null,threat:audio.threatGain?audio.threatGain.gain.value:null};if(!audio.ctx)return out;if(!window.__dark37Analyser){const a=audio.ctx.createAnalyser();a.fftSize=2048;audio.master.connect(a);window.__dark37Analyser=a;window.__dark37AudioData=new Uint8Array(a.fftSize)}const a=window.__dark37Analyser,d=window.__dark37AudioData;a.getByteTimeDomainData(d);let sum=0;for(const v of d){const x=(v-128)/128;sum+=x*x}out.rms=Math.sqrt(sum/d.length);return out},
+ audit(){return{counts:SECTORS.map((s,i)=>valveCount(i)+'/'+s.need),uniqueIds:new Set(valves.map(v=>v.id)).size===valves.length,valves:valves.length,nav:navs.map(n=>({walkable:n.walk.reduce((a,b)=>a+b,0),cells:n.walk.length})),colliders:colliders.length,waters:waters.length,localThree:!!THREE,remoteAssets:performance.getEntriesByType('resource').filter(r=>/^https?:/.test(r.name)&&!r.name.startsWith(location.origin)).map(r=>r.name)}}};
+init();
+
 </script>
 </body>
 </html>
