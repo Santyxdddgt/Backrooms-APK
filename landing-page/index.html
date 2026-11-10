@@ -193,6 +193,17 @@
   @media (min-width:600px){
     .anchor{max-width:368px}
   }
+
+  /* Reproductor del vídeo: aparece solo tras tocar un botón de descarga */
+  .video-overlay[hidden]{display:none}
+  .video-overlay{position:fixed;inset:0;z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.9)}
+  .video-card{width:min(100%,520px);max-height:92vh;overflow:auto;background:#171717;border:1px solid #444;border-radius:12px;padding:12px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+  .video-head{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#fff;margin-bottom:10px;font-family:Arial,Helvetica,sans-serif}
+  .video-head strong{font-size:14px;letter-spacing:.02em}
+  .video-close{border:1px solid #686868;border-radius:6px;background:#292929;color:#fff;padding:8px 12px;font:600 13px Arial,Helvetica,sans-serif;cursor:pointer}
+  #rickrollVideo{display:block;width:100%;max-height:72vh;background:#000;border-radius:7px}
+  .video-status{margin:10px 2px 0;color:#d0d0d0;font:12px/1.4 Arial,Helvetica,sans-serif}
+
 </style>
 </head>
 <body>
@@ -512,8 +523,26 @@
   </div>
 </div>
 
+
+<div class="video-overlay" id="videoOverlay" hidden role="dialog" aria-modal="true" aria-label="Reproductor de vídeo">
+  <div class="video-card">
+    <div class="video-head">
+      <strong>Reproduciendo vídeo</strong>
+      <button class="video-close" id="closeVideo" type="button">Cerrar</button>
+    </div>
+    <video id="rickrollVideo" controls playsinline preload="none">
+      <source src="assets/rickroll.mp4" type="video/mp4">
+      Tu navegador no puede reproducir este vídeo.
+    </video>
+    <p class="video-status" id="videoStatus" aria-live="polite">El vídeo se reproduce en esta página.</p>
+  </div>
+</div>
+
 <script>
-  const RICKROLL_URL = "https://youtu.be/QDia3e12czc?si=dzKTSNw5ULnu-0pM";
+  const videoOverlay = document.getElementById("videoOverlay");
+  const rickrollVideo = document.getElementById("rickrollVideo");
+  const videoStatus = document.getElementById("videoStatus");
+  const closeVideoButton = document.getElementById("closeVideo");
 
   function flash(el) {
     if (!el) return;
@@ -524,24 +553,54 @@
     }, 1000);
   }
 
-  function openDownloadDestination(el, event) {
+  function playRickroll(el, event) {
     event.preventDefault();
     event.stopPropagation();
     flash(el);
-    const opened = window.open(RICKROLL_URL, "_blank");
-    if (opened) opened.opener = null;
+
+    videoOverlay.hidden = false;
+    document.body.style.overflow = "hidden";
+    rickrollVideo.pause();
+    rickrollVideo.currentTime = 0;
+    rickrollVideo.muted = false;
+    rickrollVideo.volume = 1;
+    videoStatus.textContent = "Cargando vídeo…";
+
+    // Se invoca directamente desde el toque del usuario para permitir audio.
+    const playback = rickrollVideo.play();
+    if (playback && typeof playback.catch === "function") {
+      playback.catch(function () {
+        videoStatus.textContent = "El navegador bloqueó el inicio automático. Pulsa reproducir en el vídeo.";
+      });
+    }
+  }
+
+  function closeRickroll() {
+    rickrollVideo.pause();
+    rickrollVideo.currentTime = 0;
+    videoOverlay.hidden = true;
+    document.body.style.overflow = "";
+    videoStatus.textContent = "El vídeo se reproduce en esta página.";
   }
 
   document.getElementById("mainDlBtn").addEventListener("click", function (event) {
-    openDownloadDestination(this, event);
+    playRickroll(this, event);
   });
 
   document.getElementById("fasterBtn").addEventListener("click", function (event) {
-    openDownloadDestination(this, event);
+    playRickroll(this, event);
   });
 
   document.getElementById("arrowBtn").addEventListener("click", function (event) {
-    openDownloadDestination(this, event);
+    playRickroll(this, event);
+  });
+
+  closeVideoButton.addEventListener("click", closeRickroll);
+  videoOverlay.addEventListener("click", function (event) {
+    if (event.target === videoOverlay) closeRickroll();
+  });
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && !videoOverlay.hidden) closeRickroll();
   });
 
   document.querySelectorAll('a[href="#"]').forEach(function (anchor) {
